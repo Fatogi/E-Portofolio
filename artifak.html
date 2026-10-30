@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artifak Pembelajaran | E-Portfolio PPL Mandiri</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#2e86de',
+                        accent: '#27ae60',
+                        warm: '#e67e22',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== NAVBAR ===== */
+        #navbar {
+            transition: all 0.3s ease;
+        }
+        #navbar.scrolled {
+            background: rgba(30, 58, 95, 0.98) !important;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        }
+        .nav-link {
+            position: relative;
+            transition: all 0.25s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: #2e86de;
+            border-radius: 2px;
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+        }
+        .nav-link.active {
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+
+        /* ===== HERO BANNER ===== */
+        .page-hero {
+            background: linear-gradient(135deg, #162c47 0%, #1e3a5f 40%, #2e86de 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #ffffff, transparent);
+        }
+
+        /* ===== FILTER TABS ===== */
+        .filter-tab {
+            padding: 0.5rem 1.1rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 2px solid #e2e8f0;
+            background: #ffffff;
+            color: #475569;
+            white-space: nowrap;
+        }
+        .filter-tab:hover {
+            background: rgba(46, 134, 222, 0.08);
+            border-color: #93c5fd;
+            color: #2e86de;
+        }
+        .filter-tab.active {
+            background: #2e86de;
+            color: #fff;
+            border-color: #2e86de;
+            box-shadow: 0 4px 15px rgba(46, 134, 222, 0.35);
+        }
+
+        /* ===== ARTIFACT CARDS ===== */
+        .artifact-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .artifact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        .artifact-card .card-thumbnail {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .artifact-card .card-thumbnail img,
+        .artifact-card .card-thumbnail .placeholder-thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .artifact-card:hover .card-thumbnail img,
+        .artifact-card:hover .card-thumbnail .placeholder-thumb {
+            transform: scale(1.05);
+        }
+        .placeholder-thumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+        .card-siklus {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e3a5f;
+        }
+        .best-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 10px rgba(230, 126, 34, 0.4);
+        }
+
+        /* ===== VIDEO CARD ===== */
+        .video-card .card-thumbnail {
+            height: 220px;
+        }
+        .video-card .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .video-card:hover .play-overlay {
+            opacity: 1;
+        }
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2e86de;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .video-card:hover .play-btn {
+            transform: scale(1.1);
+        }
+
+        /* ===== STATS ===== */
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            font-size: 1.25rem;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2e86de 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath fill-rule='evenodd' d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #2e86de; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1e3a5f; }
+
+        /* ===== ANIMATION HELPERS ===== */
+        .card-hidden { opacity: 0; transform: scale(0.8); height: 0; overflow: hidden; margin: 0; padding: 0; }
+        .card-visible { opacity: 1; transform: scale(1); transition: all 0.4s ease; }
+
+        /* ===== FOOTER ===== */
+        .footer-wave {
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+        .footer-wave svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 bg-primary/95 backdrop-blur-md shadow-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo with Hamzanwadi & PPG Prajabatan (Transparent, No BG) -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm sm:text-base leading-tight tracking-wide block">E-Portfolio PPL</span>
+                        <span class="text-blue-200 text-[10px] sm:text-xs font-light block">Univ. Hamzanwadi &bull; PPG Prajabatan</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-2 lg:gap-3">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Beranda</a>
+                    <a href="artifak.html" class="nav-link active px-4 py-2 rounded-lg text-sm font-semibold text-white bg-white/20 transition-all">Artifak</a>
+                    <a href="analisis.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Analisis Artifak</a>
+                    <a href="refleksi.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Refleksi</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus:outline-none" aria-label="Toggle menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Menu (Placed outside nav so it is never trapped by nav backdrop-filter) -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-primary shadow-2xl z-50 flex flex-col justify-between">
+        <div class="p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center shadow">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm block leading-tight">E-Portfolio</span>
+                        <span class="text-blue-200 text-xs">PPL Mandiri</span>
+                    </div>
+                </div>
+                <button id="closeMobileMenu" class="text-white/80 hover:text-white w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors" aria-label="Tutup menu">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="index.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-home w-5 text-secondary"></i> Beranda
+                </a>
+                <a href="artifak.html" class="text-white bg-white/20 font-semibold px-4 py-3 rounded-xl transition-all text-sm flex items-center gap-3">
+                    <i class="fas fa-folder-open w-5 text-accent"></i> Artifak
+                </a>
+                <a href="analisis.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-chart-line w-5 text-warm"></i> Analisis Artifak
+                </a>
+                <a href="refleksi.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-lightbulb w-5 text-yellow-400"></i> Refleksi
+                </a>
+            </div>
+        </div>
+        <div class="p-6 border-t border-white/10 text-center">
+            <p class="text-xs text-blue-200">E-Portfolio PPL Mandiri &copy; 2025/2026</p>
+        </div>
+    </div>
+
+
+    <!-- ========== PAGE HERO / BANNER ========== -->
+    <section class="page-hero pt-28 pb-14 md:pt-36 md:pb-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Breadcrumb -->
+            <nav class="flex justify-center mb-6">
+                <ol class="flex items-center gap-2 text-sm text-blue-100/80">
+                    <li><a href="index.html" class="hover:text-white transition-colors"><i class="fas fa-home mr-1"></i>Beranda</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-white font-semibold">Artifak</li>
+                </ol>
+            </nav>
+
+            <!-- Title -->
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                Artifak <span class="text-blue-200">Pembelajaran</span>
+            </h1>
+            <p class="text-blue-100 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4">
+                Bukti Mengajar PPL Mandiri Informatika &mdash; Siklus 1: Sistem Komputer &bull; Siklus 2&ndash;3: Sistem Bilangan &bull; Siklus 4: Ulangan Harian (SMKN 1 Masbagik)
+            </p>
+
+            <!-- Decorative Icons -->
+            <div class="flex justify-center gap-4 sm:gap-6 mt-6 sm:mt-8">
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white/80 backdrop-blur-sm shadow-sm hover:bg-white/20 transition-all">
+                    <i class="fas fa-file-alt text-base sm:text-lg"></i>
+                </div>
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white/80 backdrop-blur-sm shadow-sm hover:bg-white/20 transition-all">
+                    <i class="fas fa-video text-base sm:text-lg"></i>
+                </div>
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white/80 backdrop-blur-sm shadow-sm hover:bg-white/20 transition-all">
+                    <i class="fas fa-images text-base sm:text-lg"></i>
+                </div>
+                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center text-white/80 backdrop-blur-sm shadow-sm hover:bg-white/20 transition-all">
+                    <i class="fas fa-clipboard-check text-base sm:text-lg"></i>
+                </div>
+            </div>
+
+            <!-- Quick Jump / Scroll Hint -->
+            <div class="mt-8">
+                <a href="#tentang-artifak" class="inline-flex items-center gap-2 text-blue-100 hover:text-white text-xs sm:text-sm font-medium bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-2.5 rounded-full transition-all shadow-sm">
+                    <span>Jelajahi Artifak</span>
+                    <i class="fas fa-chevron-down text-xs animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== INTRODUCTION SECTION ========== -->
+    <section id="tentang-artifak" class="py-14 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div>
+                    <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                        <i class="fas fa-info-circle"></i> Tentang Artifak PPL
+                    </span>
+                    <h2 class="font-playfair text-3xl md:text-4xl font-bold text-primary mb-6 leading-tight">
+                        Dokumentasi Praktik Mengajar Informatika
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Artifak pembelajaran ini merupakan dokumentasi autentik dari pelaksanaan 
+                        <strong class="text-primary">Praktik Pengalaman Lapangan (PPL) Mandiri / PPG</strong> pada mata pelajaran 
+                        <strong>Informatika Fase E (Kelas X TJKT 3)</strong> di <strong>SMKN 1 Masbagik</strong> yang diampu oleh 
+                        <strong>Sabda Patogi Aditya, S.Kom</strong>.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Koleksi artifak ini merangkum seluruh siklus pembelajaran mulai dari perencanaan (Modul Ajar Kurikulum Merdeka dengan model Problem Based Learning), perancangan inovasi media gamifikasi, dokumentasi pelaksanaan di kelas, kegiatan monitoring & evaluasi (Monev) bersama DPL & Guru Pamong, hingga partisipasi kegiatan ekstrakurikuler dan non-mengajar.
+                    </p>
+
+                    <!-- Key Points -->
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-accent text-sm"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm"><strong>Modul Ajar Kurikulum Merdeka</strong> dengan model Problem Based Learning (PBL), diferensiasi, dan PSE</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-accent text-sm"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm"><strong>Materi Informatika Fase E:</strong> Pengenalan Sistem Komputer & Sistem Bilangan (Desimal, Biner, Oktal, dan Heksadesimal)</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-accent text-sm"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm"><strong>Inovasi Gamifikasi:</strong> Perancangan media evaluasi dan refleksi pembelajaran berbasis game</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <i class="fas fa-check text-accent text-sm"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm"><strong>Monitoring & Evaluasi:</strong> Bimbingan langsung Dosen Pembimbing Lapangan & Guru Pamong di SMKN 1 Masbagik</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Types of Artifacts Cards -->
+                <div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-5 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-file-lines text-secondary text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-primary text-sm mb-1">Modul Ajar</h4>
+                            <p class="text-gray-500 text-xs">Sistem Komputer & Sistem Bilangan</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-5 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-gamepad text-accent text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-primary text-sm mb-1">Inovasi Media</h4>
+                            <p class="text-gray-500 text-xs">Gamifikasi & Evaluasi Interaktif</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-5 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-warm/20 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-camera text-warm text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-primary text-sm mb-1">Dokumentasi</h4>
+                            <p class="text-gray-500 text-xs">Praktik Mengajar Siklus 1 - 3</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-5 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-user-check text-purple-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-primary text-sm mb-1">Monev PPL</h4>
+                            <p class="text-gray-500 text-xs">Penilaian DPL & Guru Pamong</p>
+                        </div>
+                        <div class="col-span-2 bg-gradient-to-br from-red-50 to-pink-100 rounded-2xl p-5 text-center hover:shadow-lg transition-shadow">
+                            <div class="w-12 h-12 bg-red-200 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-video text-red-500 text-xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-primary text-sm mb-1">Video Pembelajaran & Ekskul</h4>
+                            <p class="text-gray-500 text-xs">Inovasi Gamifikasi, Ekskul Petanque & Siklus 4 (Google Drive)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== FILTER TABS & ARTIFACT CARDS ========== -->
+    <section class="py-16 md:py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Section Header -->
+            <div class="text-center mb-10">
+                <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-folder-open"></i> Koleksi Artifak Nyata
+                </span>
+                <h2 class="font-playfair text-3xl md:text-4xl font-bold text-primary mb-3">
+                    Galeri Artifak Pembelajaran PPL
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-sm sm:text-base">
+                    Bukti nyata pelaksanaan PPL Mandiri Informatika di SMKN 1 Masbagik oleh <strong>Sabda Patogi Aditya, S.Kom</strong> — meliputi Modul Ajar, Video Pembelajaran, Dokumentasi Siklus Mengajar, Monev, dan Partisipasi Sekolah.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
+                <button class="filter-tab active" data-filter="semua">
+                    <i class="fas fa-th-large mr-2"></i>Semua Artifak (14)
+                </button>
+                <button class="filter-tab" data-filter="modul-ajar">
+                    <i class="fas fa-file-lines mr-2"></i>Modul Ajar (3)
+                </button>
+                <button class="filter-tab" data-filter="video">
+                    <i class="fas fa-video mr-2"></i>Video & Ekskul (3)
+                </button>
+                <button class="filter-tab" data-filter="dokumentasi">
+                    <i class="fas fa-camera mr-2"></i>Dokumentasi Praktik (5)
+                </button>
+                <button class="filter-tab" data-filter="monev">
+                    <i class="fas fa-clipboard-check mr-2"></i>Monev & Inovasi (3)
+                </button>
+            </div>
+
+            <!-- Artifact Cards Grid -->
+            <div id="artifactGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+                <!-- ===== 1. MODUL AJAR: PENGENALAN SISTEM KOMPUTER ===== -->
+                <div class="artifact-card card-visible" data-category="modul-ajar">
+                    <div class="card-thumbnail bg-gradient-to-br from-blue-600 via-indigo-700 to-primary flex items-center justify-center relative overflow-hidden">
+                        <div class="text-center p-6 text-white z-10">
+                            <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                <i class="fas fa-laptop-code text-2xl text-blue-100"></i>
+                            </div>
+                            <span class="text-xs uppercase tracking-wider font-semibold text-blue-200">Kurikulum Merdeka</span>
+                        </div>
+                        <span class="card-badge bg-secondary/95 text-white shadow"><i class="fas fa-file-word mr-1"></i>Modul Ajar</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 1</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-secondary"></i>
+                            <span>Pertemuan I &bull; Kamis, 06 Agustus 2026</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Modul Ajar: Pengenalan Sistem Komputer</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Konsep dan identifikasi komponen hardware, software, dan brainware beserta fungsi dan alur kerja komputer (input-proses-output). Dilengkapi LKPD, tanya jawab, dan diskusi interaktif.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">Siklus 1</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Kelas X TJKT 3</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Sistem Komputer</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="assets/documents/Modul Ajar Informatika X - Pengenalan Sistem Komputer (2).docx" download class="flex-1 text-center py-2.5 bg-secondary text-white rounded-xl text-xs font-semibold hover:bg-secondary/90 shadow-md shadow-secondary/20 transition-all flex items-center justify-center gap-1.5">
+                                <i class="fas fa-download"></i> Unduh (.docx)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 2. MODUL AJAR: SISTEM BILANGAN BAGIAN 1 ===== -->
+                <div class="artifact-card card-visible" data-category="modul-ajar">
+                    <div class="card-thumbnail bg-gradient-to-br from-indigo-600 via-purple-700 to-primary flex items-center justify-center relative overflow-hidden">
+                        <div class="text-center p-6 text-white z-10">
+                            <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                <i class="fas fa-binary text-2xl text-purple-100"></i>
+                            </div>
+                            <span class="text-xs uppercase tracking-wider font-semibold text-purple-200">Desimal &bull; Biner &bull; Oktal</span>
+                        </div>
+                        <span class="card-badge bg-secondary/95 text-white shadow"><i class="fas fa-file-word mr-1"></i>Modul Ajar</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 2</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-secondary"></i>
+                            <span>Pertemuan II &bull; Kamis, 13 Agustus 2026</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Modul Ajar: Sistem Bilangan (Bagian 1)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Konsep sistem bilangan desimal, biner, dan oktal, serta teknik konversi timbal balik antar-basis bilangan. Dilengkapi dengan LKPD latihan mandiri dan berkelompok serta evaluasi formatif.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full font-medium">Siklus 2</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Kelas X TJKT 3</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Sistem Bilangan 1</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="assets/documents/Modul Ajar Informatika X - Sistem Bilangan Bagian 1.docx" download class="flex-1 text-center py-2.5 bg-secondary text-white rounded-xl text-xs font-semibold hover:bg-secondary/90 shadow-md shadow-secondary/20 transition-all flex items-center justify-center gap-1.5">
+                                <i class="fas fa-download"></i> Unduh (.docx)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 3. MODUL AJAR: SISTEM BILANGAN BAGIAN 2 ===== -->
+                <div class="artifact-card card-visible" data-category="modul-ajar">
+                    <div class="card-thumbnail bg-gradient-to-br from-amber-500 via-orange-600 to-warm flex items-center justify-center relative overflow-hidden">
+                        <div class="text-center p-6 text-white z-10">
+                            <div class="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mx-auto mb-2 shadow-lg">
+                                <i class="fas fa-calculator text-2xl text-amber-100"></i>
+                            </div>
+                            <span class="text-xs uppercase tracking-wider font-semibold text-amber-200">Heksadesimal &bull; Konversi 4-Bit</span>
+                        </div>
+                        <span class="card-badge bg-secondary/95 text-white shadow"><i class="fas fa-file-word mr-1"></i>Modul Ajar</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 3</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-warm"></i>
+                            <span>Pertemuan III &bull; Kamis, 03 September 2026</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Modul Ajar: Sistem Bilangan (Bagian 2: Heksadesimal)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Konsep sistem bilangan heksadesimal (basis 16), pemetaan 4-bit (nibble), konversi ke desimal, biner, dan jembatan biner oktal, serta aplikasi praktis TJKT (MAC Address dan Kode Warna HEX).
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-orange-50 text-warm px-3 py-1 rounded-full font-medium">Siklus 3</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Kelas X TJKT 3</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Sistem Bilangan 2</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="assets/documents/Modul_Ajar_Informatika_X_-_Sistem_Bilangan_Bagian_2.docx" download class="flex-1 text-center py-2.5 bg-secondary text-white rounded-xl text-xs font-semibold hover:bg-secondary/90 shadow-md shadow-secondary/20 transition-all flex items-center justify-center gap-1.5">
+                                <i class="fas fa-download"></i> Unduh (.docx)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 4. VIDEO PRAKTIK MENGAJAR SIKLUS 4: ULANGAN HARIAN (GOOGLE DRIVE) ===== -->
+                <div class="artifact-card video-card card-visible" data-category="video" id="video">
+                    <div class="card-thumbnail bg-slate-900 relative group overflow-hidden">
+                        <iframe src="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/preview" class="w-full h-full border-0" allow="autoplay; fullscreen" loading="lazy"></iframe>
+                        <span class="card-badge bg-red-600/95 text-white shadow pointer-events-none"><i class="fas fa-video mr-1"></i>Video Siklus 4</span>
+                        <span class="card-siklus pointer-events-none"><i class="fas fa-calendar-check mr-1"></i>Hari Ke-4</span>
+                        <span class="best-badge pointer-events-none"><i class="fab fa-google-drive mr-1"></i>Google Drive</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 text-xs text-gray-400 mb-2">
+                            <span><i class="far fa-calendar-alt text-red-500 mr-1"></i>Pertemuan IV &bull; Kamis, 10 September 2026</span>
+                            <span><i class="fab fa-google-drive text-secondary mr-1"></i>Google Drive</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Video Praktik Mengajar Hari Ke-4: Ulangan Harian (Siklus 4)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Rekaman video evaluasi komprehensif pertemuan keempat / Siklus ke-4 materi sistem komputer dan sistem bilangan di kelas X TJKT 3 SMKN 1 Masbagik. Menampilkan pengondisian kelas, ulangan tertulis, dan evaluasi lisan objektif.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-red-50 text-red-500 px-3 py-1 rounded-full font-medium">Siklus 4</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Ulangan Harian</span>
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-semibold"><i class="fas fa-check-circle text-[10px] mr-1"></i>Video Tersedia</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2.5 bg-red-600 text-white rounded-xl text-xs font-semibold hover:bg-red-700 shadow-md shadow-red-600/20 transition-all flex items-center justify-center gap-1.5">
+                                <i class="fab fa-google-drive"></i> Tonton di Google Drive
+                            </a>
+                            <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/preview" target="_blank" rel="noopener noreferrer" class="text-center py-2.5 px-4 bg-gray-100 text-gray-700 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all flex items-center justify-center gap-1" title="Buka Pratinjau">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 5. VIDEO INOVASI PEMBELAJARAN GAMIFIKASI ===== -->
+                <div class="artifact-card video-card card-visible" data-category="video monev">
+                    <div class="card-thumbnail bg-slate-900 relative">
+                        <video controls class="w-full h-full object-cover" preload="metadata" poster="">
+                            <source src="assets/videos/Kegiatan Perancangan Inovasi pembelajaran berbasis gamifikasi.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video HTML5.
+                        </video>
+                        <span class="card-badge bg-accent/90 text-white shadow pointer-events-none"><i class="fas fa-play-circle mr-1"></i>Video Inovasi</span>
+                        <span class="card-siklus pointer-events-none"><i class="fas fa-lightbulb mr-1"></i>Gamifikasi</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 text-xs text-gray-400 mb-2">
+                            <span><i class="far fa-file-video text-accent mr-1"></i>MP4 Lokal</span>
+                            <span><i class="fas fa-gamepad text-secondary mr-1"></i>Inovasi Media</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Inovasi Pembelajaran Berbasis Gamifikasi</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Video perancangan inovasi media pembelajaran berbasis game untuk menciptakan suasana belajar yang interaktif, menantang, dan meningkatkan motivasi serta pemahaman konsep siswa.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-green-50 text-accent px-3 py-1 rounded-full font-medium">Gamifikasi</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Inovasi Media</span>
+                            <span class="text-xs bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">Interaktif</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="assets/videos/Kegiatan Perancangan Inovasi pembelajaran berbasis gamifikasi.mp4" target="_blank" class="flex-1 text-center py-2.5 bg-accent/10 text-accent rounded-xl text-xs font-semibold hover:bg-accent hover:text-white transition-all">
+                                <i class="fas fa-external-link-alt mr-1"></i> Putar Fullscreen
+                            </a>
+                            <a href="assets/videos/Kegiatan Perancangan Inovasi pembelajaran berbasis gamifikasi.mp4" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 6. VIDEO KEGIATAN EKSKUL PETANQUE ===== -->
+                <div class="artifact-card video-card card-visible" data-category="video dokumentasi">
+                    <div class="card-thumbnail bg-slate-900 relative">
+                        <video controls class="w-full h-full object-cover" preload="metadata">
+                            <source src="assets/videos/Kegiatan Ekskul Petanque.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung tag video HTML5.
+                        </video>
+                        <span class="card-badge bg-warm/90 text-white shadow pointer-events-none"><i class="fas fa-volleyball-ball mr-1"></i>Non-Mengajar</span>
+                        <span class="card-siklus pointer-events-none"><i class="fas fa-medal mr-1"></i>Ekskul</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 text-xs text-gray-400 mb-2">
+                            <span><i class="far fa-file-video text-warm mr-1"></i>MP4 Lokal</span>
+                            <span><i class="fas fa-school text-primary mr-1"></i>SMKN 1 Masbagik</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Pendampingan Ekskul Olahraga Petanque</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Dokumentasi video partisipasi mahasiswa PPL dalam pembinaan dan pendampingan kegiatan ekstrakurikuler Petanque, melatih sportivitas, konsentrasi, dan kebersamaan peserta didik.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-orange-50 text-warm px-3 py-1 rounded-full font-medium">Non-Mengajar</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Ekskul Petanque</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Karakter Siswa</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <a href="assets/videos/Kegiatan Ekskul Petanque.mp4" target="_blank" class="flex-1 text-center py-2.5 bg-warm/10 text-warm rounded-xl text-xs font-semibold hover:bg-warm hover:text-white transition-all">
+                                <i class="fas fa-external-link-alt mr-1"></i> Putar Fullscreen
+                            </a>
+                            <a href="assets/videos/Kegiatan Ekskul Petanque.mp4" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh Video
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 7. FOTO SIKLUS MENGAJAR 1 ===== -->
+                <div class="artifact-card card-visible" data-category="dokumentasi">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Siklus mengajar 1.jpeg', 'Praktik Mengajar Siklus 1: Sistem Komputer', 'Pelaksanaan KBM Pertemuan I (Kamis, 06 Agustus 2026) materi Pengenalan Sistem Komputer di X TJKT 3 SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Siklus mengajar 1.jpeg" alt="Siklus Mengajar 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-secondary/90 text-white shadow"><i class="fas fa-camera mr-1"></i>Dokumentasi</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 1</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-secondary"></i>
+                            <span>Kamis, 06 Agustus 2026 &bull; Pertemuan I</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Praktik Mengajar Siklus 1: Sistem Komputer</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Pelaksanaan pembelajaran perdana materi pengenalan sistem komputer (hardware, software, brainware) serta alur proses komputer pada kelas X TJKT 3 SMKN 1 Masbagik.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">Siklus 1</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Sistem Komputer</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">X TJKT 3</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Siklus mengajar 1.jpeg', 'Praktik Mengajar Siklus 1: Sistem Komputer', 'Pelaksanaan KBM Pertemuan I (Kamis, 06 Agustus 2026) materi Pengenalan Sistem Komputer di X TJKT 3 SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-secondary/10 text-secondary rounded-xl text-xs font-semibold hover:bg-secondary hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Siklus mengajar 1.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 8. FOTO SIKLUS MENGAJAR 2 ===== -->
+                <div class="artifact-card card-visible" data-category="dokumentasi">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Siklus mengajar 2.jpeg', 'Praktik Mengajar Siklus 2: Sistem Bilangan (Bagian 1)', 'Pelaksanaan KBM Pertemuan II (Kamis, 13 Agustus 2026) materi Desimal, Biner, dan Oktal di X TJKT 3 SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Siklus mengajar 2.jpeg" alt="Siklus Mengajar 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-secondary/90 text-white shadow"><i class="fas fa-camera mr-1"></i>Dokumentasi</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 2</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-secondary"></i>
+                            <span>Kamis, 13 Agustus 2026 &bull; Pertemuan II</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Praktik Mengajar Siklus 2: Sistem Bilangan (Bagian 1)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Aktivitas KBM materi sistem bilangan desimal, biner, dan oktal. Guru memberikan penjelasan langsung interaktif dilanjutkan latihan soal konversi secara mandiri dan berkelompok.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full font-medium">Siklus 2</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Desimal, Biner, Oktal</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">X TJKT 3</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Siklus mengajar 2.jpeg', 'Praktik Mengajar Siklus 2: Sistem Bilangan (Bagian 1)', 'Pelaksanaan KBM Pertemuan II (Kamis, 13 Agustus 2026) materi Desimal, Biner, dan Oktal di X TJKT 3 SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-secondary/10 text-secondary rounded-xl text-xs font-semibold hover:bg-secondary hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Siklus mengajar 2.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 9. FOTO SIKLUS MENGAJAR 3 ===== -->
+                <div class="artifact-card card-visible" data-category="dokumentasi">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Siklus Mengajar 3.jpeg', 'Praktik Mengajar Siklus 3: Sistem Bilangan (Bagian 2)', 'Pelaksanaan KBM Pertemuan III (Kamis, 03 September 2026) materi Heksadesimal di X TJKT 3 SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Siklus Mengajar 3.jpeg" alt="Siklus Mengajar 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-secondary/90 text-white shadow"><i class="fas fa-camera mr-1"></i>Dokumentasi</span>
+                        <span class="card-siklus"><i class="fas fa-sync-alt mr-1"></i>Siklus 3</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-secondary"></i>
+                            <span>Kamis, 03 September 2026 &bull; Pertemuan III</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Praktik Mengajar Siklus 3: Sistem Bilangan (Bagian 2)</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Dokumentasi pelaksanaan KBM materi bilangan heksadesimal. Guru menyampaikan penjelasan padat dan pendampingan latihan soal secara terarah dalam jam mengajar efektif.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-orange-50 text-warm px-3 py-1 rounded-full font-medium">Siklus 3</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Heksadesimal</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">X TJKT 3</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Siklus Mengajar 3.jpeg', 'Praktik Mengajar Siklus 3: Sistem Bilangan (Bagian 2)', 'Pelaksanaan KBM Pertemuan III (Kamis, 03 September 2026) materi Heksadesimal di X TJKT 3 SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-secondary/10 text-secondary rounded-xl text-xs font-semibold hover:bg-secondary hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Siklus Mengajar 3.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 10. FOTO SUASANA MENGAJAR & PRESENTASI SISWA ===== -->
+                <div class="artifact-card card-visible" data-category="dokumentasi">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Siklus Mengajar.jpeg', 'Suasana Kelas & Presentasi Siswa', 'Presentasi hasil diskusi peserta didik di hadapan kelas X TJKT SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Siklus Mengajar.jpeg" alt="Suasana Mengajar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-secondary/90 text-white shadow"><i class="fas fa-chalkboard-teacher mr-1"></i>Suasana Kelas</span>
+                        <span class="card-siklus"><i class="fas fa-users mr-1"></i>Presentasi</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-images text-secondary"></i>
+                            <span>Foto Dokumentasi Kelas</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Presentasi Siswa & Interaksi Pembelajaran</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Dokumentasi suasana kelas saat peserta didik mempresentasikan hasil pemecahan masalah di papan tulis dan berdialog interaktif bersama teman sekelas serta guru.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">Interaktif</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Presentasi</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">SMKN 1 Masbagik</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Siklus Mengajar.jpeg', 'Suasana Kelas & Presentasi Siswa', 'Presentasi hasil diskusi peserta didik di hadapan kelas X TJKT SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-secondary/10 text-secondary rounded-xl text-xs font-semibold hover:bg-secondary hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Siklus Mengajar.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 11. MONEV PPL 1 ===== -->
+                <div class="artifact-card card-visible" data-category="monev">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Kegiatan Monev PPL.jpeg', 'Monitoring & Evaluasi (Monev) PPL', 'Peninjauan langsung oleh DPL Heri Kuswanto, M.Pd. dan Guru Pamong Romdhi Surimba, S.Kom di SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Kegiatan Monev PPL.jpeg" alt="Kegiatan Monev PPL" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-purple-600/95 text-white shadow"><i class="fas fa-clipboard-check mr-1"></i>Monev PPL</span>
+                        <span class="card-siklus"><i class="fas fa-user-tie mr-1"></i>DPL & GP</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-purple-600"></i>
+                            <span class="font-semibold text-purple-700">Sabtu, 05 September 2026</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Monitoring & Evaluasi (Monev) PPL Mandiri</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Dokumentasi pelaksanaan peninjauan dan monitoring proses mengajar mahasiswa PPL oleh Dosen Pembimbing Lapangan (DPL) <strong>Heri Kuswanto, M.Pd.</strong> serta Guru Pamong <strong>Romdhi Surimba, S.Kom</strong> di SMKN 1 Masbagik.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-purple-50 text-purple-600 px-3 py-1 rounded-full font-medium">DPL: Heri Kuswanto, M.Pd.</span>
+                            <span class="text-xs bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">GP: Romdhi Surimba, S.Kom</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Kegiatan Monev PPL.jpeg', 'Monitoring & Evaluasi (Monev) PPL', 'Peninjauan langsung oleh DPL Heri Kuswanto, M.Pd. dan Guru Pamong Romdhi Surimba, S.Kom di SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-purple-100 text-purple-700 rounded-xl text-xs font-semibold hover:bg-purple-600 hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Kegiatan Monev PPL.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 12. MONEV PPL 2 (PENGESAHAN & PENARIKAN PPL) ===== -->
+                <div class="artifact-card card-visible" data-category="monev">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Kegiatan Monev PPL 2.jpeg', 'Sesi Pengesahan & Penarikan PPL Mandiri', 'Diskusi komprehensif bersama Guru Pamong Romdhi Surimba, S.Kom dan DPL Heri Kuswanto, M.Pd.')">
+                        <img src="assets/images/PPG/Kegiatan Monev PPL 2.jpeg" alt="Monev PPL 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-emerald-600/95 text-white shadow"><i class="fas fa-stamp mr-1"></i>Pengesahan PPL</span>
+                        <span class="card-siklus"><i class="fas fa-check-double mr-1"></i>Penarikan PPL</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-emerald-600"></i>
+                            <span class="font-semibold text-emerald-700">Sabtu, 03 Oktober 2026</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Sesi Pengesahan & Penarikan PPL Mandiri</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Sesi evaluasi akhir bersama Guru Pamong <strong>Romdhi Surimba, S.Kom</strong> dan Dosen Pembimbing <strong>Heri Kuswanto, M.Pd.</strong> yang mencakup pengesahan resmi seluruh portofolio serta prosesi penarikan mahasiswa PPL Mandiri.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-purple-50 text-purple-600 px-3 py-1 rounded-full font-medium">Umpan Balik</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Refleksi Guru</span>
+                            <span class="text-xs bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full font-medium">Disahkan 03 Oktober 2026</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Kegiatan Monev PPL 2.jpeg', 'Sesi Pengesahan & Penarikan PPL Mandiri', 'Diskusi komprehensif bersama Guru Pamong Romdhi Surimba, S.Kom dan DPL Heri Kuswanto, M.Pd.')" class="flex-1 text-center py-2.5 bg-emerald-100 text-emerald-700 rounded-xl text-xs font-semibold hover:bg-emerald-600 hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Kegiatan Monev PPL 2.jpeg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 13. WORKSHOP TES EVALUASI REFLEKSI GAME ===== -->
+                <div class="artifact-card card-visible" data-category="monev">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Workshop membuat tes evaluasirefleksi pembelajaran berbasis game.jpg', 'Workshop Tes Evaluasi Berbasis Game', 'Pembuatan instrumen evaluasi dan refleksi pembelajaran berbasis gamifikasi')">
+                        <img src="assets/images/PPG/Workshop membuat tes evaluasirefleksi pembelajaran berbasis game.jpg" alt="Workshop Evaluasi Game" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-accent/95 text-white shadow"><i class="fas fa-tools mr-1"></i>Workshop</span>
+                        <span class="card-siklus"><i class="fas fa-gamepad mr-1"></i>Gamifikasi</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="fas fa-graduation-cap text-accent"></i>
+                            <span>Pengembangan Kompetensi Guru</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Workshop Evaluasi & Refleksi Berbasis Game</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Dokumentasi kegiatan workshop penyusunan instrumen tes evaluasi dan refleksi pembelajaran berbasis game guna menghadirkan asesmen yang interaktif dan menyenangkan bagi siswa.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-green-50 text-accent px-3 py-1 rounded-full font-medium">Gamifikasi</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Asesmen Kreatif</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Workshop</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Workshop membuat tes evaluasirefleksi pembelajaran berbasis game.jpg', 'Workshop Tes Evaluasi Berbasis Game', 'Pembuatan instrumen evaluasi dan refleksi pembelajaran berbasis gamifikasi')" class="flex-1 text-center py-2.5 bg-accent/10 text-accent rounded-xl text-xs font-semibold hover:bg-accent hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Workshop membuat tes evaluasirefleksi pembelajaran berbasis game.jpg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== 14. PARTISIPASI MAULID NABI ===== -->
+                <div class="artifact-card card-visible" data-category="dokumentasi">
+                    <div class="card-thumbnail cursor-pointer group" onclick="openPhotoModal('assets/images/PPG/Kegiatan Mauilid Nabi Muhammad.jpg', 'Peringatan Maulid Nabi Muhammad SAW', 'Partisipasi kegiatan sosial keagamaan di SMKN 1 Masbagik')">
+                        <img src="assets/images/PPG/Kegiatan Mauilid Nabi Muhammad.jpg" alt="Maulid Nabi Muhammad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="card-badge bg-warm/95 text-white shadow"><i class="fas fa-mosque mr-1"></i>Non-Mengajar</span>
+                        <span class="card-siklus"><i class="fas fa-heart mr-1"></i>Budaya Sekolah</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                            <i class="far fa-calendar-alt text-warm"></i>
+                            <span>Kegiatan Non-Mengajar</span>
+                        </div>
+                        <h3 class="font-semibold text-primary text-lg mb-2 leading-snug">Peringatan Maulid Nabi Muhammad SAW</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                            Partisipasi mahasiswa PPL dalam kegiatan keagamaan dan pembentukan karakter peserta didik pada peringatan Maulid Nabi Muhammad SAW bersama civitas akademika SMKN 1 Masbagik.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs bg-orange-50 text-warm px-3 py-1 rounded-full font-medium">Non-Mengajar</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">Karakter Religius</span>
+                            <span class="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full">SMKN 1 Masbagik</span>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <button type="button" onclick="openPhotoModal('assets/images/PPG/Kegiatan Mauilid Nabi Muhammad.jpg', 'Peringatan Maulid Nabi Muhammad SAW', 'Partisipasi kegiatan sosial keagamaan di SMKN 1 Masbagik')" class="flex-1 text-center py-2.5 bg-warm/10 text-warm rounded-xl text-xs font-semibold hover:bg-warm hover:text-white transition-all">
+                                <i class="fas fa-expand mr-1"></i> Lihat Foto
+                            </button>
+                            <a href="assets/images/PPG/Kegiatan Mauilid Nabi Muhammad.jpg" download class="flex-1 text-center py-2.5 bg-gray-100 text-gray-600 rounded-xl text-xs font-semibold hover:bg-gray-200 transition-all">
+                                <i class="fas fa-download mr-1"></i> Unduh
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end #artifactGrid -->
+
+            <!-- No Results Message (hidden by default) -->
+            <div id="noResults" class="hidden text-center py-16">
+                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-search text-gray-300 text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-400 mb-2">Tidak Ada Artifak</h3>
+                <p class="text-gray-400 text-sm">Belum ada artifak untuk kategori ini.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========== SUMMARY STATISTICS ========== -->
+    <section class="py-16 md:py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <span class="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-1.5 rounded-full text-sm font-semibold mb-4">
+                    <i class="fas fa-chart-pie"></i> Ringkasan Portofolio
+                </span>
+                <h2 class="font-playfair text-3xl md:text-4xl font-bold text-primary mb-3">
+                    Statistik Artifak Pembelajaran
+                </h2>
+                <p class="text-gray-500 max-w-xl mx-auto text-sm sm:text-base">
+                    Distribusi seluruh bukti nyata praktik pengalaman lapangan yang telah dikumpulkan di SMKN 1 Masbagik.
+                </p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+                <!-- Total -->
+                <div class="stat-card col-span-2 md:col-span-1">
+                    <div class="stat-icon bg-primary/10 text-primary mx-auto">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <div class="stat-number text-primary">14</div>
+                    <p class="text-gray-500 text-sm font-medium">Total Artifak</p>
+                </div>
+                <!-- Modul Ajar -->
+                <div class="stat-card">
+                    <div class="stat-icon bg-secondary/10 text-secondary mx-auto">
+                        <i class="fas fa-file-lines"></i>
+                    </div>
+                    <div class="stat-number text-secondary">3</div>
+                    <p class="text-gray-500 text-sm font-medium">Modul Ajar</p>
+                </div>
+                <!-- Video & Ekskul -->
+                <div class="stat-card">
+                    <div class="stat-icon bg-red-100 text-red-500 mx-auto">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="stat-number text-red-500">3</div>
+                    <p class="text-gray-500 text-sm font-medium">Video & Ekskul</p>
+                </div>
+                <!-- Dokumentasi Praktik -->
+                <div class="stat-card">
+                    <div class="stat-icon bg-warm/10 text-warm mx-auto">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="stat-number text-warm">5</div>
+                    <p class="text-gray-500 text-sm font-medium">Dokumentasi</p>
+                </div>
+                <!-- Monev & Inovasi -->
+                <div class="stat-card col-span-2 md:col-span-1">
+                    <div class="stat-icon bg-purple-100 text-purple-600 mx-auto">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="stat-number text-purple-600">3</div>
+                    <p class="text-gray-500 text-sm font-medium">Monev & Inovasi</p>
+                </div>
+            </div>
+
+            <!-- Siklus Breakdown (4 Siklus Sesuai Jurnal Harian Guru) -->
+            <div class="mt-14 bg-gradient-to-br from-slate-50 via-white to-blue-50/50 rounded-3xl p-6 sm:p-10 border border-blue-100/80 shadow-sm">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <span class="inline-flex items-center gap-1.5 bg-secondary/10 text-secondary text-xs font-semibold px-3.5 py-1 rounded-full mb-3">
+                        <i class="fas fa-layer-group"></i> Alur Kronologis KBM
+                    </span>
+                    <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary !m-0 !mb-2">Distribusi 4 Siklus Pembelajaran &mdash; SMKN 1 Masbagik</h3>
+                    <p class="text-gray-500 text-xs sm:text-sm leading-relaxed">Struktur pembelajaran teratur pada mata pelajaran Informatika Kelas X TJKT 3 Semester Ganjil 2026/2027</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
+                    <!-- Siklus 1 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-blue-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3.5">
+                                <span class="inline-flex items-center gap-2 bg-blue-50 text-secondary px-3 py-1 rounded-xl text-xs font-bold border border-blue-200/60 shadow-xs">
+                                    <span class="w-5 h-5 rounded-md bg-secondary text-white flex items-center justify-center text-[11px] font-black">1</span>
+                                    <span>Siklus 1</span>
+                                </span>
+                                <span class="text-[11px] font-bold text-blue-800 bg-blue-50/80 border border-blue-100 px-2 py-0.5 rounded-md">Pertemuan I</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs font-semibold text-secondary mb-2">
+                                <i class="far fa-calendar-alt text-[11px]"></i>
+                                <span>Kamis, 06 Agustus 2026</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-base mb-2 leading-snug !m-0 !mb-2 group-hover:text-secondary transition-colors">Pengenalan Sistem Komputer</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-4">Hardware, software, brainware, alur Input-Process-Output (I-P-O), apersepsi kontekstual, dan pengondisian awal kelas.</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] mt-auto">
+                            <span class="text-gray-600 font-medium flex items-center gap-1">
+                                <i class="fas fa-user-check text-emerald-500 text-[10px]"></i> Hadir: <strong class="text-gray-800">86,11%</strong>
+                            </span>
+                            <span class="text-secondary font-semibold text-[10px] uppercase tracking-wider">KBM Selesai</span>
+                        </div>
+                    </div>
+
+                    <!-- Siklus 2 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-indigo-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3.5">
+                                <span class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-3 py-1 rounded-xl text-xs font-bold border border-indigo-200/60 shadow-xs">
+                                    <span class="w-5 h-5 rounded-md bg-indigo-600 text-white flex items-center justify-center text-[11px] font-black">2</span>
+                                    <span>Siklus 2</span>
+                                </span>
+                                <span class="text-[11px] font-bold text-indigo-800 bg-indigo-50/80 border border-indigo-100 px-2 py-0.5 rounded-md">Pertemuan II</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs font-semibold text-indigo-600 mb-2">
+                                <i class="far fa-calendar-alt text-[11px]"></i>
+                                <span>Kamis, 13 Agustus 2026</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-base mb-2 leading-snug !m-0 !mb-2 group-hover:text-indigo-600 transition-colors">Sistem Bilangan (Bag. 1)</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-4">Konsep & konversi bilangan Desimal, Biner, dan Oktal dengan penjelasan langsung terarah, latihan bersusun, dan LKPD.</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] mt-auto">
+                            <span class="text-gray-600 font-medium flex items-center gap-1">
+                                <i class="fas fa-user-check text-emerald-500 text-[10px]"></i> Hadir: <strong class="text-gray-800">88,89%</strong>
+                            </span>
+                            <span class="text-indigo-600 font-semibold text-[10px] uppercase tracking-wider">KBM Selesai</span>
+                        </div>
+                    </div>
+
+                    <!-- Siklus 3 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-amber-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3.5">
+                                <span class="inline-flex items-center gap-2 bg-amber-50 text-warm px-3 py-1 rounded-xl text-xs font-bold border border-amber-200/60 shadow-xs">
+                                    <span class="w-5 h-5 rounded-md bg-warm text-white flex items-center justify-center text-[11px] font-black">3</span>
+                                    <span>Siklus 3</span>
+                                </span>
+                                <span class="text-[11px] font-bold text-amber-800 bg-amber-50/80 border border-amber-100 px-2 py-0.5 rounded-md">Pertemuan III</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs font-semibold text-warm mb-2">
+                                <i class="far fa-calendar-alt text-[11px]"></i>
+                                <span>Kamis, 03 September 2026</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-base mb-2 leading-snug !m-0 !mb-2 group-hover:text-warm transition-colors">Sistem Bilangan (Bag. 2)</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-4">Konsep Heksadesimal & konversi lanjutan (1 JP efektif karena rapat sekolah, materi padat terarah & penugasan mandiri).</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] mt-auto">
+                            <span class="text-gray-600 font-medium flex items-center gap-1">
+                                <i class="fas fa-user-check text-emerald-500 text-[10px]"></i> Hadir: <strong class="text-gray-800">94,44%</strong>
+                            </span>
+                            <span class="text-warm font-semibold text-[10px] uppercase tracking-wider">KBM Selesai</span>
+                        </div>
+                    </div>
+
+                    <!-- Siklus 4 -->
+                    <div class="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-red-100 hover:shadow-lg hover:-translate-y-1 transition-all flex flex-col justify-between h-full group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-3.5">
+                                <span class="inline-flex items-center gap-2 bg-red-50 text-red-600 px-3 py-1 rounded-xl text-xs font-bold border border-red-200/60 shadow-xs">
+                                    <span class="w-5 h-5 rounded-md bg-red-600 text-white flex items-center justify-center text-[11px] font-black">4</span>
+                                    <span>Siklus 4</span>
+                                </span>
+                                <span class="text-[11px] font-bold text-red-800 bg-red-50/80 border border-red-100 px-2 py-0.5 rounded-md">Pertemuan IV</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs font-semibold text-red-500 mb-2">
+                                <i class="far fa-calendar-alt text-[11px]"></i>
+                                <span>Kamis, 10 September 2026</span>
+                            </div>
+                            <h4 class="font-bold text-primary text-base mb-2 leading-snug !m-0 !mb-2 group-hover:text-red-600 transition-colors">Ulangan Harian</h4>
+                            <p class="text-gray-500 text-xs leading-relaxed mb-4">Evaluasi komprehensif tertulis & lisan sistem komputer & sistem bilangan (rekaman video Google Drive terhubung).</p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] mt-auto">
+                            <span class="text-gray-600 font-medium flex items-center gap-1">
+                                <i class="fas fa-user-check text-emerald-500 text-[10px]"></i> Hadir: <strong class="text-gray-800">91,67%</strong>
+                            </span>
+                            <span class="text-red-500 font-semibold text-[10px] uppercase tracking-wider">Video Terhubung</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JURNAL HARIAN GURU INTERAKTIF -->
+            <div id="jurnal-harian" class="mt-12 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-gray-100 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="bg-secondary/10 text-secondary text-xs px-3 py-0.5 rounded-full font-semibold">Dokumen Autentik</span>
+                            <span class="text-gray-400 text-xs">PPL Mandiri &bull; 2026/2027</span>
+                        </div>
+                        <h3 class="font-playfair text-xl sm:text-2xl font-bold text-primary">Jurnal Harian Guru</h3>
+                        <p class="text-gray-500 text-xs sm:text-sm mt-0.5">SMK Negeri 1 Masbagik &mdash; Guru: Sabda Patogi Aditya, S.Kom (X TJKT 3)</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-slate-100 text-gray-600 px-3 py-1.5 rounded-lg border border-gray-200">
+                            <i class="fas fa-check-double text-accent mr-1"></i> 4 Siklus Terlaksana
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Table View for Desktop / Card View for Mobile -->
+                <div class="mt-6 overflow-x-auto">
+                    <table class="w-full text-left text-xs text-gray-700 border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-primary border-b border-gray-200 text-xs uppercase tracking-wider">
+                                <th class="p-3 font-bold w-12 text-center">No</th>
+                                <th class="p-3 font-bold whitespace-nowrap">Hari / Tanggal</th>
+                                <th class="p-3 font-bold whitespace-nowrap">Siklus / Pert.</th>
+                                <th class="p-3 font-bold min-w-[200px]">Tujuan Pembelajaran</th>
+                                <th class="p-3 font-bold min-w-[220px]">Kegiatan KBM</th>
+                                <th class="p-3 font-bold text-center">Absensi</th>
+                                <th class="p-3 font-bold text-center">Hadir</th>
+                                <th class="p-3 font-bold min-w-[240px]">Catatan / Solusi Guru</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <!-- Pertemuan 1 -->
+                            <tr class="hover:bg-blue-50/40 transition-colors">
+                                <td class="p-3 text-center font-bold text-secondary">1</td>
+                                <td class="p-3 whitespace-nowrap font-medium text-gray-900">Kamis, 06 Agt 2026</td>
+                                <td class="p-3 whitespace-nowrap">
+                                    <span class="bg-blue-100 text-secondary px-2.5 py-0.5 rounded-full font-semibold text-[11px]">Siklus 1 (I)</span>
+                                </td>
+                                <td class="p-3 leading-relaxed">
+                                    Menjelaskan pengertian sistem komputer & mengidentifikasi komponen (hardware, software, brainware) beserta fungsi & alur kerjanya.
+                                </td>
+                                <td class="p-3 leading-relaxed text-gray-600">
+                                    Apersepsi, penjelasan konsep alur I-P-O, tanya jawab dan pengondisian diskusi kelompok, penarikan kesimpulan.
+                                </td>
+                                <td class="p-3 text-center whitespace-nowrap">
+                                    <span class="text-amber-700 font-medium">S: 3</span> &bull; <span class="text-red-600 font-medium">A: 2</span>
+                                </td>
+                                <td class="p-3 text-center font-bold text-secondary">86,11%</td>
+                                <td class="p-3 leading-relaxed text-gray-600 bg-slate-50/50">
+                                    Peserta didik sempat sulit dikondisikan saat diskusi kelompok. Guru menerapkan strategi <em>teacher centered interaktif</em> terarah yang berhasil meningkatkan fokus & antusiasme siswa.
+                                </td>
+                            </tr>
+
+                            <!-- Pertemuan 2 -->
+                            <tr class="hover:bg-indigo-50/40 transition-colors">
+                                <td class="p-3 text-center font-bold text-indigo-600">2</td>
+                                <td class="p-3 whitespace-nowrap font-medium text-gray-900">Kamis, 13 Agt 2026</td>
+                                <td class="p-3 whitespace-nowrap">
+                                    <span class="bg-indigo-100 text-indigo-700 px-2.5 py-0.5 rounded-full font-semibold text-[11px]">Siklus 2 (II)</span>
+                                </td>
+                                <td class="p-3 leading-relaxed">
+                                    Memahami konsep sistem bilangan desimal, biner, dan oktal, serta mampu melakukan konversi bilangan timbal balik.
+                                </td>
+                                <td class="p-3 leading-relaxed text-gray-600">
+                                    Apersepsi keterkaitan sistem komputer, penjelasan konsep konversi basis 10, 2, 8, latihan soal mandiri & kelompok, evaluasi singkat.
+                                </td>
+                                <td class="p-3 text-center whitespace-nowrap">
+                                    <span class="text-amber-700 font-medium">S: 1</span> &bull; <span class="text-red-600 font-medium">A: 3</span>
+                                </td>
+                                <td class="p-3 text-center font-bold text-indigo-600">88,89%</td>
+                                <td class="p-3 leading-relaxed text-gray-600 bg-slate-50/50">
+                                    KBM berjalan lebih lancar melalui penjelasan langsung dan sesi tanya jawab berkala di sela materi sebagai bentuk evaluasi formatif.
+                                </td>
+                            </tr>
+
+                            <!-- Pertemuan 3 -->
+                            <tr class="hover:bg-amber-50/40 transition-colors">
+                                <td class="p-3 text-center font-bold text-warm">3</td>
+                                <td class="p-3 whitespace-nowrap font-medium text-gray-900">Kamis, 03 Sept 2026</td>
+                                <td class="p-3 whitespace-nowrap">
+                                    <span class="bg-amber-100 text-amber-800 px-2.5 py-0.5 rounded-full font-semibold text-[11px]">Siklus 3 (III)</span>
+                                </td>
+                                <td class="p-3 leading-relaxed">
+                                    Memahami konsep bilangan heksadesimal dan melakukan konversi heksadesimal ke desimal, biner, dan oktal maupun sebaliknya.
+                                </td>
+                                <td class="p-3 leading-relaxed text-gray-600">
+                                    Waktu 1 JP efektif (rapat sekolah), pembukaan singkat, penyampaian materi padat cara konversi heksadesimal, tugas mandiri di rumah.
+                                </td>
+                                <td class="p-3 text-center whitespace-nowrap">
+                                    <span class="text-gray-400">S: 0</span> &bull; <span class="text-red-600 font-medium">A: 2</span>
+                                </td>
+                                <td class="p-3 text-center font-bold text-accent">94,44%</td>
+                                <td class="p-3 leading-relaxed text-gray-600 bg-slate-50/50">
+                                    Keterbatasan jam belajar karena rapat sekolah disiasati dengan rangkuman padat dan tugas terstruktur untuk penguatan di rumah.
+                                </td>
+                            </tr>
+
+                            <!-- Pertemuan 4 -->
+                            <tr class="hover:bg-red-50/40 transition-colors">
+                                <td class="p-3 text-center font-bold text-red-500">4</td>
+                                <td class="p-3 whitespace-nowrap font-medium text-gray-900">Kamis, 10 Sept 2026</td>
+                                <td class="p-3 whitespace-nowrap">
+                                    <span class="bg-red-100 text-red-600 px-2.5 py-0.5 rounded-full font-semibold text-[11px]">Siklus 4 (IV)</span>
+                                </td>
+                                <td class="p-3 leading-relaxed">
+                                    Menunjukkan pemahaman komprehensif terhadap materi sistem komputer dan seluruh sistem bilangan yang telah dipelajari.
+                                </td>
+                                <td class="p-3 leading-relaxed text-gray-600">
+                                    Pengondisian kelas, penyampaian tata tertib, pelaksanaan ulangan harian tertulis, refleksi singkat dan rencana berikutnya.
+                                </td>
+                                <td class="p-3 text-center whitespace-nowrap">
+                                    <span class="text-gray-400">S: 0</span> &bull; <span class="text-red-600 font-medium">A: 3</span>
+                                </td>
+                                <td class="p-3 text-center font-bold text-red-500">91,67%</td>
+                                <td class="p-3 leading-relaxed text-gray-600 bg-slate-50/50">
+                                    Siswa yang bermain-main saat ulangan diberikan konsekuensi mendidik berupa ulangan lisan secara langsung untuk menjaga objektivitas penilaian.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta-section py-20 md:py-24 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div>
+                <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-chart-line text-white text-2xl"></i>
+                </div>
+                <h2 class="font-playfair text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+                    Lihat Analisis Mendalam
+                </h2>
+                <p class="text-blue-100 text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                    Selanjutnya, pelajari analisis mendalam dari setiap artifak untuk memahami 
+                    kekuatan, kelemahan, dan perkembangan kompetensi mengajar dari siklus ke siklus.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="analisis.html" class="inline-flex items-center gap-3 bg-white text-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-blue-50 hover:shadow-xl transition-all duration-300 group">
+                        <span>Analisis Artifak</span>
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="refleksi.html" class="inline-flex items-center gap-3 bg-white/10 border-2 border-white/30 text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-white/20 transition-all duration-300">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Refleksi Diri</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-primary text-white relative pt-16 pb-8">
+        <!-- Wave -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="#f8fafc" opacity=".8"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="#f8fafc" opacity=".5"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-10 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-10 w-auto object-contain drop-shadow">
+                        <div>
+                            <span class="font-bold text-base text-white block">E-Portfolio PPL</span>
+                            <span class="text-blue-200 text-xs block">Univ. Hamzanwadi &bull; PPG</span>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 text-sm leading-relaxed">
+                        Dokumentasi perjalanan Praktik Pengalaman Lapangan Mandiri sebagai bukti 
+                        pengembangan kompetensi pedagogik dan profesional calon guru.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Navigasi</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-blue-200 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Beranda</a></li>
+                        <li><a href="artifak.html" class="text-white font-semibold transition-colors text-sm flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Artifak</a></li>
+                        <li><a href="analisis.html" class="text-blue-200 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Analisis Artifak</a></li>
+                        <li><a href="refleksi.html" class="text-blue-200 hover:text-white transition-colors text-sm flex items-center gap-2"><i class="fas fa-chevron-right text-xs"></i> Refleksi</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Informasi Pengampu</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-blue-200 text-sm">
+                            <i class="fas fa-user-tie w-5 text-secondary"></i>
+                            <span>Sabda Patogi Aditya, S.Kom</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-blue-200 text-sm">
+                            <i class="fas fa-school w-5 text-accent"></i>
+                            <span>SMKN 1 Masbagik</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-blue-200 text-sm">
+                            <i class="fas fa-laptop-code w-5 text-warm"></i>
+                            <span>Informatika (Fase E / X TJKT 3)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-blue-200 text-sm">
+                            <i class="fas fa-calendar-check w-5 text-blue-300"></i>
+                            <span>PPL Mandiri / PPG 2026/2027</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-white/10 pt-8 text-center">
+                <p class="text-blue-200 text-sm">
+                    &copy; 2026 E-Portfolio PPL Mandiri &mdash; Sabda Patogi Aditya, S.Kom &bull; SMKN 1 Masbagik
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Photo Modal / Lightbox -->
+    <div id="photoModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
+            <button onclick="closePhotoModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-black/60 hover:bg-black text-white rounded-full flex items-center justify-center transition-colors" aria-label="Tutup foto">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <div class="max-h-[70vh] bg-slate-950 flex items-center justify-center overflow-hidden">
+                <img id="photoModalImg" src="" alt="Pratinjau Foto" class="max-h-[70vh] max-w-full object-contain">
+            </div>
+            <div class="p-6 bg-white">
+                <h3 id="photoModalTitle" class="text-lg sm:text-xl font-bold text-primary mb-1"></h3>
+                <p id="photoModalDesc" class="text-gray-600 text-xs sm:text-sm"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========== SCRIPTS ========== -->
+    <!-- Local JS -->
+    <script src="js/main.js"></script>
+
+    <!-- Page-Specific Script -->
+    <script>
+        // ===== Navbar Scroll Effect =====
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('scrolled', 'shadow-xl');
+                } else {
+                    navbar.classList.remove('scrolled', 'shadow-xl');
+                }
+            });
+        }
+
+        // ===== Mobile Menu Toggle =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openMenu() {
+            if (mobileMenu) mobileMenu.classList.add('open');
+            if (mobileOverlay) mobileOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            if (mobileMenu) mobileMenu.classList.remove('open');
+            if (mobileOverlay) mobileOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+
+        if (mobileMenu) {
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
+        }
+
+        // ===== Filter Tabs =====
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const artifactCards = document.querySelectorAll('#artifactGrid .artifact-card');
+        const noResults = document.getElementById('noResults');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+                let visibleCount = 0;
+
+                artifactCards.forEach(card => {
+                    const category = card.dataset.category || '';
+                    if (filter === 'semua' || category.split(' ').includes(filter)) {
+                        card.classList.remove('card-hidden');
+                        card.classList.add('card-visible');
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.classList.remove('card-visible');
+                        card.classList.add('card-hidden');
+                        setTimeout(() => {
+                            if (card.classList.contains('card-hidden')) {
+                                card.style.display = 'none';
+                            }
+                        }, 300);
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    if (noResults) noResults.classList.remove('hidden');
+                } else {
+                    if (noResults) noResults.classList.add('hidden');
+                }
+            });
+        });
+
+        // ===== Photo Modal Functions =====
+        function openPhotoModal(src, title, desc) {
+            const modal = document.getElementById('photoModal');
+            const img = document.getElementById('photoModalImg');
+            const titleEl = document.getElementById('photoModalTitle');
+            const descEl = document.getElementById('photoModalDesc');
+            if (modal && img) {
+                img.src = src;
+                if (titleEl) titleEl.textContent = title || 'Dokumentasi Praktik Mengajar';
+                if (descEl) descEl.textContent = desc || '';
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closePhotoModal() {
+            const modal = document.getElementById('photoModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        }
+        const photoModal = document.getElementById('photoModal');
+        if (photoModal) {
+            photoModal.addEventListener('click', (e) => {
+                if (e.target.id === 'photoModal') closePhotoModal();
+            });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePhotoModal();
+        });
+
+        // ===== Smooth Scroll for Anchor Links =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetAttr = this.getAttribute('href');
+                if (targetAttr && targetAttr !== '#') {
+                    const target = document.querySelector(targetAttr);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

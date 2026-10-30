@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="E-Portfolio PPL Mandiri - Dokumentasi Perjalanan Praktik Pengalaman Lapangan Mandiri">
+    <meta name="keywords" content="PPL Mandiri, E-Portfolio, Praktik Pengalaman Lapangan, Pendidikan, Mengajar">
+    <meta name="author" content="Mahasiswa PPL Mandiri">
+    <title>Beranda | E-Portfolio PPL Mandiri</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#2e86de',
+                        accent: '#27ae60',
+                        warm: '#e67e22',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ===== Loading Screen ===== */
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1e3a5f;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .loader-spinner {
+            width: 52px;
+            height: 52px;
+            border: 4px solid rgba(255,255,255,0.15);
+            border-top-color: #2e86de;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader-text {
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ===== Typing Effect ===== */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.15em;
+            background: #fff;
+            margin-left: 4px;
+            vertical-align: text-bottom;
+            animation: blink 0.75s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ===== Hero Decorative Shapes ===== */
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        /* ===== Counter Animation ===== */
+        .counter-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ===== Navbar Active Link ===== */
+        .nav-link.active {
+            color: #2e86de;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 2.5px;
+            background: #2e86de;
+            border-radius: 2px;
+        }
+
+        /* ===== Smooth Scrollbar ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #2e86de; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #1e3a5f; }
+    </style>
+</head>
+
+<body class="font-poppins text-gray-800 bg-white overflow-x-hidden">
+
+    <!-- ========================================= -->
+    <!-- LOADING SCREEN                            -->
+    <!-- ========================================= -->
+    <div id="loading-screen">
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <span class="loader-text">Memuat E-Portfolio...</span>
+        </div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- NAVIGATION BAR                            -->
+    <!-- ========================================= -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <!-- Logo with Hamzanwadi & PPG Prajabatan (Transparent, No BG) -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                    </div>
+                    <div>
+                        <span class="text-base sm:text-lg font-bold text-white transition-colors duration-300 block leading-tight" id="logo-text">E-Portfolio PPL</span>
+                        <span class="text-[10px] sm:text-xs text-blue-200 transition-colors duration-300 block font-normal" id="logo-subtext">Univ. Hamzanwadi &bull; PPG Prajabatan</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="index.html" class="nav-link active px-4 py-2 rounded-lg text-sm font-medium text-white hover:text-secondary transition-colors">Beranda</a>
+                    <a href="artifak.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-secondary transition-colors">Artifak</a>
+                    <a href="analisis.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-secondary transition-colors">Analisis Artifak</a>
+                    <a href="refleksi.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-secondary transition-colors">Refleksi</a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-menu-btn" class="lg:hidden relative w-10 h-10 flex items-center justify-center text-white focus:outline-none" aria-label="Toggle Menu">
+                    <span class="hamburger-line absolute h-0.5 w-6 bg-current transform transition-all duration-300" style="top: calc(50% - 6px);"></span>
+                    <span class="hamburger-line absolute h-0.5 w-6 bg-current transition-all duration-300" style="top: 50%; transform: translateY(-50%);"></span>
+                    <span class="hamburger-line absolute h-0.5 w-4 bg-current transform transition-all duration-300 ml-auto" style="top: calc(50% + 5px); right: 8px;"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="lg:hidden max-h-0 overflow-hidden transition-all duration-500 bg-primary/95 backdrop-blur-md">
+            <div class="px-6 py-4 space-y-1 border-t border-white/10">
+                <a href="index.html" class="block px-4 py-3 rounded-lg text-sm font-medium text-secondary bg-white/10">
+                    <i class="fas fa-home mr-3 w-5 text-center"></i>Beranda
+                </a>
+                <a href="artifak.html" class="block px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:bg-white/5 transition-colors">
+                    <i class="fas fa-folder-open mr-3 w-5 text-center"></i>Artifak
+                </a>
+                <a href="analisis.html" class="block px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:bg-white/5 transition-colors">
+                    <i class="fas fa-chart-bar mr-3 w-5 text-center"></i>Analisis Artifak
+                </a>
+                <a href="refleksi.html" class="block px-4 py-3 rounded-lg text-sm font-medium text-white/80 hover:bg-white/5 transition-colors">
+                    <i class="fas fa-lightbulb mr-3 w-5 text-center"></i>Refleksi
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================= -->
+    <!-- HERO SECTION                              -->
+    <!-- ========================================= -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden py-28 md:py-32">
+        <!-- Background Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-primary via-[#1a3352] to-[#0f2440]"></div>
+
+        <!-- Decorative Elements -->
+        <div class="hero-shape w-96 h-96 bg-secondary/15 -top-20 -right-20 pointer-events-none" style="position:absolute;"></div>
+        <div class="hero-shape w-72 h-72 bg-accent/15 bottom-10 -left-16 pointer-events-none" style="position:absolute;"></div>
+        <div class="hero-shape w-56 h-56 bg-warm/15 top-1/3 right-1/4 pointer-events-none" style="position:absolute;"></div>
+
+        <!-- Grid Pattern Overlay -->
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto mb-8">
+            <!-- Institutional Badges with Real Logos (Transparent, No White BG Boxes) -->
+            <div class="inline-flex items-center gap-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-2.5 mb-6 shadow-xl">
+                <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Logo Universitas Hamzanwadi" class="h-10 sm:h-12 w-auto object-contain drop-shadow">
+                <div class="w-px h-8 bg-white/30"></div>
+                <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="Logo PPG Prajabatan" class="h-10 sm:h-12 w-auto object-contain drop-shadow">
+                <div class="text-left pl-1">
+                    <span class="text-xs sm:text-sm font-bold text-white block uppercase tracking-wider">Universitas Hamzanwadi</span>
+                    <span class="text-[11px] sm:text-xs text-blue-200 block">PPG Prajabatan &bull; PPL Mandiri 2026/2027</span>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-5">
+                E-Portfolio<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-secondary via-blue-300 to-accent">PPL Mandiri</span>
+            </h1>
+
+            <!-- Typing Subtitle -->
+            <div class="mb-4 min-h-[3.25rem] flex items-center justify-center">
+                <p class="text-base sm:text-lg md:text-xl text-blue-100 font-light max-w-2xl mx-auto">
+                    <span id="typing-text"></span><span class="typing-cursor"></span>
+                </p>
+            </div>
+
+            <!-- School / Context (Fixed: removed [Nama Universitas]) -->
+            <p class="text-white/75 text-xs sm:text-sm mb-8 tracking-wider flex items-center justify-center gap-2">
+                <i class="fas fa-school text-accent"></i>
+                <span>SMK Negeri 1 Masbagik &bull; Tahun Ajaran 2026/2027</span>
+            </p>
+
+            <!-- CTA Buttons (Generous margin, never overlaps scroll indicator) -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+                <a href="#profil" class="group inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-semibold text-sm sm:text-base px-8 py-3.5 rounded-full shadow-lg shadow-secondary/30 transition-all duration-300 hover:-translate-y-0.5">
+                    <span>Jelajahi Portfolio</span>
+                    <i class="fas fa-arrow-down text-xs group-hover:translate-y-1 transition-transform"></i>
+                </a>
+                <a href="artifak.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/60 text-white font-medium text-sm sm:text-base px-8 py-3.5 rounded-full transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-sm">
+                    <i class="fas fa-folder-open text-accent"></i>
+                    <span>Lihat Artifak</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator (Direct child of section, pinned at true bottom, never overlapping buttons) -->
+        <a href="#profil" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
+            <span class="text-white/70 text-[10px] tracking-widest uppercase font-semibold">Scroll</span>
+            <div class="w-5 h-8 border-2 border-white/40 rounded-full flex justify-center pt-1.5">
+                <div class="w-1.5 h-1.5 bg-white/90 rounded-full animate-bounce"></div>
+            </div>
+        </a>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PROFIL SECTION                            -->
+    <!-- ========================================= -->
+    <section id="profil" class="py-20 lg:py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block text-secondary font-semibold text-sm tracking-wider uppercase mb-3">Tentang Saya</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">Profil Mahasiswa PPL</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid lg:grid-cols-5 gap-10 lg:gap-16 items-center">
+                <!-- Photo & Quick Info -->
+                <div class="lg:col-span-2 flex flex-col items-center">
+                    <!-- Photo (Real User Photo from assets) -->
+                    <div class="relative mb-8">
+                        <div class="w-48 h-48 sm:w-56 sm:h-56 rounded-full border-4 border-secondary/40 overflow-hidden shadow-2xl bg-white flex items-center justify-center ring-4 ring-secondary/20">
+                            <img src="assets/images/PPG/FOTO DIRI.jpg" alt="Sabda Patogi Aditya, S.Kom" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <!-- Status Badge -->
+                        <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-accent text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-md whitespace-nowrap">
+                            <i class="fas fa-check-circle mr-1"></i>Guru PPL Mandiri
+                        </div>
+                    </div>
+
+                    <!-- Name -->
+                    <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary text-center mb-1">Sabda Patogi Aditya, S.Kom</h3>
+                    <p class="text-secondary font-medium mb-6 text-center text-sm sm:text-base">Guru PPL Mandiri &bull; Informatika Fase E</p>
+
+                    <!-- Social / Contact Links -->
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary text-primary hover:text-white flex items-center justify-center transition-all duration-300" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary text-primary hover:text-white flex items-center justify-center transition-all duration-300" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary text-primary hover:text-white flex items-center justify-center transition-all duration-300" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="artifak.html" class="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary text-primary hover:text-white flex items-center justify-center transition-all duration-300" title="Lihat Artifak">
+                            <i class="fas fa-folder-open"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Detail Info -->
+                <div class="lg:col-span-3">
+                    <!-- Info Cards Grid -->
+                    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                        <!-- LPTK & Program PPG Card with Transparent Logos -->
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/70 rounded-xl p-5 shadow-sm border border-blue-200/70 sm:col-span-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="flex items-center gap-3.5">
+                                <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-12 w-auto object-contain">
+                                <img src="assets/images/PPG/Logo PPG_transparent.png" alt="PPG Prajabatan" class="h-12 w-auto object-contain">
+                                <div>
+                                    <span class="text-xs text-secondary uppercase tracking-wider font-bold block">LPTK Penyelenggara & Program</span>
+                                    <h4 class="font-bold text-primary text-base">Universitas Hamzanwadi</h4>
+                                    <p class="text-xs text-gray-600">Pendidikan Profesi Guru (PPG) Prajabatan 2026/2027</p>
+                                </div>
+                            </div>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white text-secondary font-bold text-xs rounded-lg border border-secondary/20 shadow-xs flex-shrink-0">
+                                <i class="fas fa-award text-accent"></i> PPG Prajabatan
+                            </span>
+                        </div>
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center">
+                                    <i class="fas fa-id-card text-secondary text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 uppercase tracking-wider font-medium">Mata Pelajaran & Fase</span>
+                            </div>
+                            <p class="font-semibold text-primary pl-12">Informatika (Fase E / X TJKT 3)</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
+                                    <i class="fas fa-book-reader text-accent text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 uppercase tracking-wider font-medium">Sekolah Mitra</span>
+                            </div>
+                            <p class="font-semibold text-primary pl-12">SMK Negeri 1 Masbagik</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                                    <i class="fas fa-calendar-alt text-primary text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 uppercase tracking-wider font-medium">Pelaksanaan PPL</span>
+                            </div>
+                            <p class="font-semibold text-primary pl-12">Tahun Ajaran 2026/2027</p>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-warm/10 flex items-center justify-center">
+                                    <i class="fas fa-stamp text-warm text-sm"></i>
+                                </div>
+                                <span class="text-xs text-gray-500 uppercase tracking-wider font-medium">Pengesahan & Penarikan PPL</span>
+                            </div>
+                            <p class="font-semibold text-primary pl-12">Sabtu, 3 Oktober 2026</p>
+                        </div>
+
+                        <!-- Guru Pamong (Authentic Name) -->
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-blue-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-secondary/10 flex items-center justify-center">
+                                    <i class="fas fa-chalkboard-teacher text-secondary text-sm"></i>
+                                </div>
+                                <span class="text-xs text-secondary uppercase tracking-wider font-bold">Guru Pamong</span>
+                            </div>
+                            <p class="font-bold text-primary pl-12 text-base">Romdhi Surimba, S.Kom</p>
+                            <p class="text-[11px] text-gray-500 pl-12">SMK Negeri 1 Masbagik</p>
+                        </div>
+
+                        <!-- DPL (Authentic Name) -->
+                        <div class="bg-white rounded-xl p-5 shadow-sm border border-indigo-100 hover:shadow-md transition-shadow">
+                            <div class="flex items-center gap-3 mb-1">
+                                <div class="w-9 h-9 rounded-lg bg-indigo-100 flex items-center justify-center">
+                                    <i class="fas fa-user-graduate text-indigo-700 text-sm"></i>
+                                </div>
+                                <span class="text-xs text-indigo-700 uppercase tracking-wider font-bold">Dosen Pembimbing (DPL)</span>
+                            </div>
+                            <p class="font-bold text-primary pl-12 text-base">Heri Kuswanto, M.Pd.</p>
+                            <p class="text-[11px] text-gray-500 pl-12">Dosen Pembimbing Lapangan</p>
+                        </div>
+                    </div>
+
+                    <!-- Bio -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fas fa-quote-left text-secondary/40"></i>
+                            <h4 class="font-semibold text-primary text-sm uppercase tracking-wider">Tentang Saya</h4>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            Saya adalah guru Praktik Pengalaman Lapangan (PPL) Mandiri yang mengampu mata pelajaran Informatika Fase E (Kelas X TJKT 3) di SMK Negeri 1 Masbagik. Melalui pembelajaran berbasis Kurikulum Merdeka, model Problem Based Learning (PBL), dan diferensiasi materi sistem komputer serta sistem bilangan, saya menyusun dokumentasi autentik ini di bawah bimbingan Guru Pamong <strong>Romdhi Surimba, S.Kom</strong> dan Dosen Pembimbing Lapangan <strong>Heri Kuswanto, M.Pd.</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- PENGANTAR E-PORTFOLIO SECTION             -->
+    <!-- ========================================= -->
+    <section id="pengantar" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block text-accent font-semibold text-sm tracking-wider uppercase mb-3">Pendahuluan</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">Pengantar E-Portfolio</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-accent to-secondary mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+                <!-- Left: What & Why -->
+                <div data-aos="fade-right" data-aos-delay="200">
+                    <div class="bg-gradient-to-br from-primary to-[#254a77] rounded-2xl p-8 sm:p-10 text-white shadow-xl mb-8">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                                <i class="fas fa-question-circle text-secondary text-xl"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl sm:text-2xl font-bold">Apa itu E-Portfolio?</h3>
+                        </div>
+                        <p class="text-white/85 leading-relaxed mb-4">
+                            E-Portfolio PPL Mandiri adalah kumpulan digital dari berbagai dokumen, artifak, dan refleksi yang 
+                            mendokumentasikan perjalanan mahasiswa selama menjalani Praktik Pengalaman Lapangan (PPL) Mandiri. 
+                            Portfolio elektronik ini berfungsi sebagai wadah untuk menunjukkan perkembangan kompetensi mengajar, 
+                            kemampuan analisis, serta kapasitas reflektif mahasiswa calon guru.
+                        </p>
+                        <p class="text-white/85 leading-relaxed">
+                            Melalui E-Portfolio ini, setiap tahapan proses pembelajaran yang telah dilaksanakan dapat 
+                            terdokumentasi secara sistematis dan terstruktur, mulai dari perencanaan pembelajaran, pelaksanaan 
+                            di kelas, hingga evaluasi dan refleksi pasca mengajar.
+                        </p>
+                    </div>
+
+                    <div class="bg-accent/5 border border-accent/20 rounded-2xl p-8" data-aos="fade-right" data-aos-delay="300">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                                <i class="fas fa-bullseye text-accent text-xl"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl sm:text-2xl font-bold text-primary">Tujuan E-Portfolio</h3>
+                        </div>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-accent text-xs"></i>
+                                </span>
+                                <span class="text-gray-700">Mendokumentasikan seluruh proses dan hasil kegiatan PPL Mandiri secara komprehensif dan terorganisir</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-accent text-xs"></i>
+                                </span>
+                                <span class="text-gray-700">Menunjukkan perkembangan kompetensi mengajar dari siklus ke siklus</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-accent text-xs"></i>
+                                </span>
+                                <span class="text-gray-700">Memfasilitasi proses refleksi mendalam terhadap praktik mengajar yang telah dilakukan</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-accent text-xs"></i>
+                                </span>
+                                <span class="text-gray-700">Menjadi bahan evaluasi bagi dosen pembimbing dan guru pamong dalam menilai kinerja mahasiswa</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <i class="fas fa-check text-accent text-xs"></i>
+                                </span>
+                                <span class="text-gray-700">Membangun kebiasaan praktik reflektif sebagai fondasi pengembangan profesionalisme guru</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: How & PPL -->
+                <div>
+                    <div class="bg-secondary/5 border border-secondary/20 rounded-2xl p-8 mb-8" data-aos="fade-left" data-aos-delay="200">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center">
+                                <i class="fas fa-sitemap text-secondary text-xl"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl sm:text-2xl font-bold text-primary">Organisasi E-Portfolio</h3>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-5">
+                            E-Portfolio ini disusun secara sistematis ke dalam beberapa bagian utama agar memudahkan 
+                            pembaca dalam memahami keseluruhan proses PPL Mandiri yang telah dilalui:
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-secondary font-bold text-sm">01</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary">Artifak Mengajar</h4>
+                                    <p class="text-gray-500 text-sm">RPP, media pembelajaran, lembar kerja, dan video praktik mengajar dari setiap siklus</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-accent font-bold text-sm">02</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary">Analisis Artifak</h4>
+                                    <p class="text-gray-500 text-sm">Pembahasan mendalam mengenai kelebihan, kekurangan, dan area perbaikan dari setiap artifak</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4 items-start bg-white rounded-xl p-4 shadow-sm">
+                                <div class="w-10 h-10 rounded-lg bg-warm/10 flex items-center justify-center flex-shrink-0">
+                                    <span class="text-warm font-bold text-sm">03</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-primary">Refleksi</h4>
+                                    <p class="text-gray-500 text-sm">Refleksi komprehensif tentang pembelajaran, pertumbuhan, dan rencana pengembangan diri</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-warm/5 border border-warm/20 rounded-2xl p-8" data-aos="fade-left" data-aos-delay="300">
+                        <div class="flex items-center gap-3 mb-5">
+                            <div class="w-12 h-12 rounded-xl bg-warm/10 flex items-center justify-center">
+                                <i class="fas fa-chalkboard text-warm text-xl"></i>
+                            </div>
+                            <h3 class="font-playfair text-xl sm:text-2xl font-bold text-primary">Tentang PPL Mandiri</h3>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            Praktik Pengalaman Lapangan (PPL) Mandiri merupakan program wajib bagi mahasiswa program studi 
+                            kependidikan sebagai wahana pembentukan dan peningkatan kompetensi profesional calon guru. 
+                            Program ini memberikan pengalaman langsung kepada mahasiswa untuk merencanakan, melaksanakan, 
+                            dan mengevaluasi proses pembelajaran di sekolah mitra.
+                        </p>
+                        <p class="text-gray-700 leading-relaxed mb-5">
+                            PPL Mandiri dilaksanakan dalam beberapa siklus mengajar, di mana setiap siklus memiliki fokus 
+                            pengembangan kompetensi yang berbeda. E-Portfolio ini khusus mendokumentasikan kegiatan pada:
+                        </p>
+                        <div class="flex flex-wrap gap-2 sm:gap-3">
+                            <span class="inline-flex items-center gap-1.5 bg-blue-50 text-secondary border border-blue-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                                <i class="fas fa-desktop text-xs"></i> Siklus 1: Sistem Komputer (06 Agt 2026)
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 border border-indigo-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                                <i class="fas fa-binary text-xs"></i> Siklus 2: Sistem Bilangan 1 (13 Agt 2026)
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 bg-amber-50 text-warm border border-amber-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                                <i class="fas fa-calculator text-xs"></i> Siklus 3: Sistem Bilangan 2 (03 Sept 2026)
+                            </span>
+                            <span class="inline-flex items-center gap-1.5 bg-red-50 text-red-600 border border-red-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                                <i class="fas fa-clipboard-check text-xs"></i> Siklus 4: Ulangan Harian (10 Sept 2026)
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- KONTEN PORTFOLIO OVERVIEW                 -->
+    <!-- ========================================= -->
+    <section id="konten" class="py-20 lg:py-28 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block text-warm font-semibold text-sm tracking-wider uppercase mb-3">Konten Utama</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4">Jelajahi Portfolio</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Telusuri setiap bagian dari E-Portfolio ini untuk melihat dokumentasi lengkap perjalanan PPL Mandiri saya</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-warm to-secondary mx-auto rounded-full mt-4"></div>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Card 1: Artifak -->
+                <a href="artifak.html" class="group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-secondary/70 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-secondary/20">
+                            <i class="fas fa-folder-open text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors">Artifak Mengajar</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed flex-grow">
+                            Kumpulan dokumen dan media pembelajaran yang dihasilkan selama PPL Mandiri, termasuk RPP, 
+                            lembar kerja siswa, media presentasi, dan materi ajar lainnya.
+                        </p>
+                        <div class="mt-5 flex items-center gap-2 text-secondary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Lihat Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 2: Analisis -->
+                <a href="analisis.html" class="group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/70 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-accent/20">
+                            <i class="fas fa-chart-bar text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-primary text-lg mb-3 group-hover:text-accent transition-colors">Analisis Artifak</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed flex-grow">
+                            Analisis mendalam terhadap setiap artifak mengajar yang telah dikumpulkan, mencakup evaluasi 
+                            kelebihan, identifikasi kelemahan, dan rekomendasi perbaikan untuk siklus selanjutnya.
+                        </p>
+                        <div class="mt-5 flex items-center gap-2 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Lihat Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 3: Refleksi -->
+                <a href="refleksi.html" class="group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-warm to-warm/70 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-warm/20">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-primary text-lg mb-3 group-hover:text-warm transition-colors">Refleksi</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed flex-grow">
+                            Refleksi komprehensif yang menggambarkan proses berpikir, perasaan, dan pembelajaran yang 
+                            diperoleh selama menjalani PPL Mandiri, serta rencana tindak lanjut pengembangan diri.
+                        </p>
+                        <div class="mt-5 flex items-center gap-2 text-warm text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Lihat Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Card 4: Video -->
+                <a href="artifak.html#video" class="group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-white rounded-2xl p-7 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 h-full flex flex-col">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/20">
+                            <i class="fas fa-video text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-primary text-lg mb-3 group-hover:text-secondary transition-colors">Video Pembelajaran</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed flex-grow">
+                            Rekaman video praktik mengajar di kelas yang menunjukkan interaksi langsung dengan siswa, 
+                            pengelolaan kelas, serta penerapan strategi pembelajaran yang telah direncanakan.
+                        </p>
+                        <div class="mt-5 flex items-center gap-2 text-primary text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Lihat Selengkapnya <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- STATISTIK SECTION                         -->
+    <!-- ========================================= -->
+    <section id="statistik" class="py-20 lg:py-28 bg-gradient-to-br from-primary via-[#1a3352] to-[#0f2440] relative overflow-hidden">
+        <!-- Decorative -->
+        <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, #fff 1px, transparent 1px); background-size: 30px 30px;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="inline-block text-secondary font-semibold text-sm tracking-wider uppercase mb-3">Dalam Angka</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">Ringkasan Portfolio</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-secondary to-accent mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Counter Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+                <!-- Counter 1 -->
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors duration-300">
+                        <div class="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-5">
+                            <i class="fas fa-sync-alt text-secondary text-2xl"></i>
+                        </div>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="counter-value text-4xl sm:text-5xl font-bold text-white" data-target="4">0</span>
+                        </div>
+                        <p class="text-white/60 text-sm font-medium">Siklus Mengajar</p>
+                    </div>
+                </div>
+
+                <!-- Counter 2 -->
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors duration-300">
+                        <div class="w-16 h-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-5">
+                            <i class="fas fa-file-alt text-accent text-2xl"></i>
+                        </div>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="counter-value text-4xl sm:text-5xl font-bold text-white" data-target="10">0</span>
+                            <span class="text-2xl sm:text-3xl font-bold text-white/60">+</span>
+                        </div>
+                        <p class="text-white/60 text-sm font-medium">Artifak</p>
+                    </div>
+                </div>
+
+                <!-- Counter 3 -->
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors duration-300">
+                        <div class="w-16 h-16 rounded-full bg-warm/20 flex items-center justify-center mx-auto mb-5">
+                            <i class="fas fa-search text-warm text-2xl"></i>
+                        </div>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="counter-value text-4xl sm:text-5xl font-bold text-white" data-target="3">0</span>
+                        </div>
+                        <p class="text-white/60 text-sm font-medium">Analisis Mendalam</p>
+                    </div>
+                </div>
+
+                <!-- Counter 4 -->
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors duration-300">
+                        <div class="w-16 h-16 rounded-full bg-primary/40 flex items-center justify-center mx-auto mb-5">
+                            <i class="fas fa-pen-fancy text-white/80 text-2xl"></i>
+                        </div>
+                        <div class="flex items-center justify-center gap-1 mb-2">
+                            <span class="counter-value text-4xl sm:text-5xl font-bold text-white" data-target="1">0</span>
+                        </div>
+                        <p class="text-white/60 text-sm font-medium">Refleksi Komprehensif</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================= -->
+    <!-- FOOTER                                    -->
+    <!-- ========================================= -->
+    <footer class="bg-primary text-white">
+        <!-- Main Footer -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                <!-- About & Official Logos -->
+                <div class="lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-5">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-10 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-10 w-auto object-contain drop-shadow">
+                        <div>
+                            <span class="text-base font-bold text-white block">E-Portfolio PPL</span>
+                            <span class="text-[11px] text-blue-200 block">Univ. Hamzanwadi &bull; PPG</span>
+                        </div>
+                    </div>
+                    <p class="text-white/70 text-xs sm:text-sm leading-relaxed mb-5">
+                        Dokumentasi autentik pelaksanaan Praktik Pengalaman Lapangan (PPL) Mandiri Informatika Fase E di SMK Negeri 1 Masbagik &mdash; LPTK Universitas Hamzanwadi.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary text-white/60 hover:text-white flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-instagram text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary text-white/60 hover:text-white flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-linkedin-in text-sm"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-secondary text-white/60 hover:text-white flex items-center justify-center transition-all duration-300">
+                            <i class="fab fa-github text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Navigasi Utama</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Beranda</a></li>
+                        <li><a href="artifak.html" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Artifak Mengajar</a></li>
+                        <li><a href="analisis.html" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Analisis Artifak</a></li>
+                        <li><a href="refleksi.html" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Refleksi Pembelajaran</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sections -->
+                <div>
+                    <h4 class="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Halaman Ini</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#hero" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Hero</a></li>
+                        <li><a href="#profil" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Profil Mahasiswa</a></li>
+                        <li><a href="#pengantar" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Pengantar E-Portfolio</a></li>
+                        <li><a href="#konten" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Struktur Portofolio</a></li>
+                        <li><a href="#statistik" class="text-white/75 hover:text-white text-sm transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Statistik Pembelajaran</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-semibold text-white mb-5 text-sm uppercase tracking-wider">Informasi Pengampu</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-white/75 text-sm">
+                            <i class="fas fa-user-tie text-secondary w-4 text-center"></i>
+                            Sabda Patogi Aditya, S.Kom
+                        </li>
+                        <li class="flex items-center gap-3 text-white/75 text-sm">
+                            <i class="fas fa-university text-accent w-4 text-center"></i>
+                            Universitas Hamzanwadi
+                        </li>
+                        <li class="flex items-center gap-3 text-white/75 text-sm">
+                            <i class="fas fa-school text-accent w-4 text-center"></i>
+                            SMKN 1 Masbagik
+                        </li>
+                        <li class="flex items-center gap-3 text-white/75 text-sm">
+                            <i class="fas fa-laptop-code text-warm w-4 text-center"></i>
+                            Informatika (Fase E / X TJKT 3)
+                        </li>
+                        <li class="flex items-center gap-3 text-white/75 text-sm">
+                            <i class="fas fa-award text-blue-300 w-4 text-center"></i>
+                            PPL Mandiri / PPG Prajabatan
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <p class="text-white/40 text-sm text-center sm:text-left">
+                        &copy; 2026 E-Portfolio PPL Mandiri — Sabda Patogi Aditya, S.Kom &bull; SMKN 1 Masbagik.
+                    </p>
+                    <p class="text-white/40 text-xs text-center sm:text-right">
+                        <i class="fas fa-heart text-red-400 mx-1"></i> Dibuat untuk memenuhi tugas PPL Mandiri
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================= -->
+    <!-- BACK TO TOP BUTTON                        -->
+    <!-- ========================================= -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-secondary text-white shadow-lg shadow-secondary/30 flex items-center justify-center opacity-0 invisible translate-y-4 transition-all duration-300 hover:bg-primary hover:-translate-y-1 z-40" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ========================================= -->
+    <!-- SCRIPTS                                   -->
+    <!-- ========================================= -->
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Inline Scripts (before external main.js to ensure critical features load) -->
+    <script>
+        // ===== Loading Screen =====
+        function hideLoadingScreen() {
+            const loader = document.getElementById('loading-screen');
+            if (loader && !loader.classList.contains('hidden')) {
+                loader.classList.add('hidden');
+            }
+        }
+        window.addEventListener('load', function () {
+            setTimeout(hideLoadingScreen, 500);
+        });
+        // Fallback: hide loading screen after 1.5s max
+        setTimeout(hideLoadingScreen, 1500);
+
+        // ===== Initialize AOS (with fallback safety) =====
+        if (typeof AOS !== 'undefined') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 80,
+            });
+        }
+
+        // ===== Navbar Scroll Effect =====
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const logoSubtext = document.getElementById('logo-subtext');
+
+        function updateNavbar() {
+            if (window.scrollY > 80) {
+                navbar.classList.remove('bg-transparent');
+                navbar.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/5');
+                if (logoText) {
+                    logoText.classList.remove('text-white');
+                    logoText.classList.add('text-primary');
+                }
+                if (logoSubtext) {
+                    logoSubtext.classList.remove('text-blue-200');
+                    logoSubtext.classList.add('text-gray-500');
+                }
+                document.querySelectorAll('.nav-link:not(.active)').forEach(function (link) {
+                    link.classList.remove('text-white/80');
+                    link.classList.add('text-gray-600');
+                });
+                document.querySelectorAll('.nav-link.active').forEach(function (link) {
+                    link.classList.remove('text-white');
+                });
+                document.getElementById('mobile-menu-btn').classList.remove('text-white');
+                document.getElementById('mobile-menu-btn').classList.add('text-primary');
+            } else {
+                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/5');
+                if (logoText) {
+                    logoText.classList.add('text-white');
+                    logoText.classList.remove('text-primary');
+                }
+                if (logoSubtext) {
+                    logoSubtext.classList.add('text-blue-200');
+                    logoSubtext.classList.remove('text-gray-500');
+                }
+                document.querySelectorAll('.nav-link:not(.active)').forEach(function (link) {
+                    link.classList.add('text-white/80');
+                    link.classList.remove('text-gray-600');
+                });
+                document.querySelectorAll('.nav-link.active').forEach(function (link) {
+                    link.classList.add('text-white');
+                });
+                document.getElementById('mobile-menu-btn').classList.add('text-white');
+                document.getElementById('mobile-menu-btn').classList.remove('text-primary');
+            }
+        }
+        window.addEventListener('scroll', updateNavbar);
+        updateNavbar();
+
+        // ===== Mobile Menu Toggle =====
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let menuOpen = false;
+
+        mobileMenuBtn.addEventListener('click', function () {
+            menuOpen = !menuOpen;
+            if (menuOpen) {
+                mobileMenu.style.maxHeight = mobileMenu.scrollHeight + 'px';
+            } else {
+                mobileMenu.style.maxHeight = '0';
+            }
+            // Animate hamburger lines
+            const lines = mobileMenuBtn.querySelectorAll('.hamburger-line');
+            if (menuOpen) {
+                lines[0].style.top = '50%';
+                lines[0].style.transform = 'translateY(-50%) rotate(45deg)';
+                lines[1].style.opacity = '0';
+                lines[2].style.top = '50%';
+                lines[2].style.transform = 'translateY(-50%) rotate(-45deg)';
+                lines[2].style.width = '1.5rem';
+            } else {
+                lines[0].style.top = 'calc(50% - 6px)';
+                lines[0].style.transform = 'none';
+                lines[1].style.opacity = '1';
+                lines[2].style.top = 'calc(50% + 5px)';
+                lines[2].style.transform = 'none';
+                lines[2].style.width = '1rem';
+            }
+        });
+
+        // ===== Typing Effect =====
+        (function () {
+            var texts = [
+                'Informatika Fase E (Kelas X TJKT 3) — SMKN 1 Masbagik',
+                'Dokumentasi Praktik Pengalaman Lapangan (PPL) Mandiri',
+                'Siklus 1: Sistem Komputer • Siklus 2-3: Sistem Bilangan',
+                'Refleksi Pedagogik & Pengesahan Guru Pamong & DPL'
+            ];
+            var el = document.getElementById('typing-text');
+            var textIdx = 0, charIdx = 0, deleting = false;
+
+            function type() {
+                var current = texts[textIdx];
+                if (!deleting) {
+                    el.textContent = current.substring(0, charIdx + 1);
+                    charIdx++;
+                    if (charIdx === current.length) {
+                        deleting = true;
+                        setTimeout(type, 2000);
+                        return;
+                    }
+                    setTimeout(type, 50);
+                } else {
+                    el.textContent = current.substring(0, charIdx - 1);
+                    charIdx--;
+                    if (charIdx === 0) {
+                        deleting = false;
+                        textIdx = (textIdx + 1) % texts.length;
+                        setTimeout(type, 400);
+                        return;
+                    }
+                    setTimeout(type, 30);
+                }
+            }
+            setTimeout(type, 1200);
+        })();
+
+        // ===== Animated Counters =====
+        function animateCounters() {
+            document.querySelectorAll('.counter-value').forEach(function (counter) {
+                if (counter.dataset.animated) return;
+                var target = parseInt(counter.dataset.target, 10);
+                var duration = 2000;
+                var startTime = null;
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    var progress = Math.min((timestamp - startTime) / duration, 1);
+                    // easeOutCubic
+                    var ease = 1 - Math.pow(1 - progress, 3);
+                    counter.textContent = Math.floor(ease * target);
+                    if (progress < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        counter.textContent = target;
+                    }
+                }
+
+                counter.dataset.animated = 'true';
+                requestAnimationFrame(step);
+            });
+        }
+
+        // Intersection Observer for counters
+        var statsSection = document.getElementById('statistik');
+        if (statsSection) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            observer.observe(statsSection);
+        }
+
+        // ===== Back to Top Button =====
+        var backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 500) {
+                backToTop.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                backToTop.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTop.classList.add('opacity-0', 'invisible', 'translate-y-4');
+                backToTop.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
+        });
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== Contact Form (prevent default) =====
+        var contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                alert('Terima kasih! Pesan Anda telah dikirim.');
+                contactForm.reset();
+            });
+        }
+
+        // ===== Smooth Scroll for anchor links =====
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+                if (href === '#') return;
+                var target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    // Close mobile menu if open
+                    if (menuOpen) {
+                        mobileMenuBtn.click();
+                    }
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+    <!-- Local JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

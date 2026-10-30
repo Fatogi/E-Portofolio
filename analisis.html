@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Artifak | E-Portfolio PPL Mandiri</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#2e86de',
+                        accent: '#27ae60',
+                        warm: '#e67e22',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .page-hero {
+            background: linear-gradient(135deg, #162c47 0%, #1e3a5f 40%, #2e86de 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #ffffff, transparent);
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        /* Ensure all card header titles in gradient banners are crisp white with no unwanted margin */
+        .card-header-gradient h3,
+        .card-header-gradient h2 {
+            color: #ffffff !important;
+            margin-bottom: 0 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 bg-primary/95 backdrop-blur-md shadow-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo with Hamzanwadi & PPG Prajabatan (Transparent, No BG) -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm sm:text-base leading-tight tracking-wide block">E-Portfolio PPL</span>
+                        <span class="text-blue-200 text-[10px] sm:text-xs font-light block">Univ. Hamzanwadi &bull; PPG Prajabatan</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-2 lg:gap-3">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Beranda</a>
+                    <a href="artifak.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Artifak</a>
+                    <a href="analisis.html" class="nav-link active px-4 py-2 rounded-lg text-sm font-semibold text-white bg-white/20 transition-all">Analisis Artifak</a>
+                    <a href="refleksi.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Refleksi</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus:outline-none" aria-label="Toggle menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-primary shadow-2xl z-50 flex flex-col justify-between">
+        <div class="p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center shadow">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm block leading-tight">E-Portfolio</span>
+                        <span class="text-blue-200 text-xs">PPL Mandiri</span>
+                    </div>
+                </div>
+                <button id="closeMobileMenu" class="text-white/80 hover:text-white w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors" aria-label="Tutup menu">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="index.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-home w-5 text-secondary"></i> Beranda
+                </a>
+                <a href="artifak.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-folder-open w-5 text-accent"></i> Artifak
+                </a>
+                <a href="analisis.html" class="text-white bg-white/20 font-semibold px-4 py-3 rounded-xl transition-all text-sm flex items-center gap-3">
+                    <i class="fas fa-chart-line w-5 text-warm"></i> Analisis Artifak
+                </a>
+                <a href="refleksi.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-lightbulb w-5 text-yellow-400"></i> Refleksi
+                </a>
+            </div>
+        </div>
+        <div class="p-6 border-t border-white/10 text-center">
+            <p class="text-xs text-blue-200">E-Portfolio PPL Mandiri &copy; 2026</p>
+        </div>
+    </div>
+
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero pt-28 pb-14 md:pt-36 md:pb-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Breadcrumb -->
+            <nav class="flex justify-center mb-6">
+                <ol class="flex items-center gap-2 text-sm text-blue-100/80">
+                    <li><a href="index.html" class="hover:text-white transition-colors"><i class="fas fa-home mr-1"></i>Beranda</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-white font-semibold">Analisis Artifak</li>
+                </ol>
+            </nav>
+
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                Analisis <span class="text-blue-200">Artifak Pembelajaran</span>
+            </h1>
+            <p class="text-blue-100 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
+                Evaluasi Kritis, Keberhasilan, dan Tindak Lanjut PPL Mandiri Informatika di SMKN 1 Masbagik
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ========== METODOLOGI ANALISIS ========== -->
+    <section class="py-14 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary px-4 py-1.5 rounded-full text-sm font-semibold mb-3">
+                    <i class="fas fa-microscope"></i> Pendekatan Evaluasi
+                </span>
+                <h2 class="font-playfair text-2xl sm:text-3xl font-bold text-primary mb-3">
+                    Kerangka Analisis Artifak Mengajar
+                </h2>
+                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Setiap artifak dianalisis berdasarkan 4 pilar utama: kesesuaian kurikulum merdeka, efektivitas model Problem Based Learning (PBL), responsivitas pembelajaran berdiferensiasi & PSE, serta umpan balik dari Dosen Pembimbing Lapangan dan Guru Pamong.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-5 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-secondary/20 rounded-xl flex items-center justify-center mx-auto mb-3 text-secondary text-xl">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Kesesuaian CP & TP</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Tercapainya Capaian Pembelajaran Informatika Fase E SMKN 1 Masbagik.</p>
+                </div>
+                <div class="bg-green-50/70 border border-green-100 rounded-2xl p-5 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center mx-auto mb-3 text-accent text-xl">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Sintaks PBL</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Keterlaksanaan 5 tahapan Problem Based Learning dalam mengasah nalar kritis.</p>
+                </div>
+                <div class="bg-orange-50/70 border border-orange-100 rounded-2xl p-5 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-warm/20 rounded-xl flex items-center justify-center mx-auto mb-3 text-warm text-xl">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Diferensiasi & PSE</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Akomodasi profil belajar siswa X TJKT 3 serta integrasi kompetensi sosial-emosional.</p>
+                </div>
+                <div class="bg-purple-50/70 border border-purple-100 rounded-2xl p-5 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 bg-purple-200 rounded-xl flex items-center justify-center mx-auto mb-3 text-purple-700 text-xl">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Dampak & Evaluasi</h3>
+                    <p class="text-gray-500 text-xs leading-relaxed">Peningkatan hasil belajar kognitif, motivasi siswa, dan umpan balik pembimbing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== DETAIL ANALISIS TIAP ARTIFAK ========== -->
+    <section class="py-16 md:py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+            <!-- 1. ANALISIS SIKLUS 1: PENGENALAN SISTEM KOMPUTER -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-blue-700 to-indigo-800 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Siklus 1 &bull; Pertemuan I</span>
+                            <span class="text-blue-200 text-xs font-medium">Kamis, 06 Agustus 2026 &bull; Hadir: 86,11% (31/36 Siswa)</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Analisis Siklus 1: Pengenalan Sistem Komputer</h3>
+                    </div>
+                    <a href="assets/documents/Modul Ajar Informatika X - Pengenalan Sistem Komputer (2).docx" download class="inline-flex items-center gap-2 bg-white text-blue-900 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-blue-50 transition-all shadow-md flex-shrink-0">
+                        <i class="fas fa-download"></i> Unduh Modul
+                    </a>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Temuan Proses KBM -->
+                        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-check-circle text-accent"></i> Ketercapaian TP & KBM
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Peserta didik mampu menjelaskan pengertian sistem komputer serta mengidentifikasi komponen penyusunnya (hardware, software, brainware) dan alur kerja (Input &rarr; Proses &rarr; Output).</li>
+                                <li>&bull; Alur KBM terlaksana utuh: pendahuluan apersepsi, pemaparan konsep kontekstual, tanya jawab, serta refleksi penutup.</li>
+                                <li>&bull; Kehadiran: 31 siswa hadir (86,11%), 3 sakit (Abdul Majid Al Faozan, Ardian Holid, Bilal Iman), dan 2 alpa (Firmanto Saputra, Bayu Maulana).</li>
+                            </ul>
+                        </div>
+                        <!-- Kendala Lapangan -->
+                        <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-exclamation-triangle text-warm"></i> Kendala Dinamika Kelompok
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Peserta didik masih cenderung sulit dikondisikan pada saat diberikan tugas kelompok bebas akibat kurangnya minat sebagian siswa pada diskusi kelompok.</li>
+                                <li>&bull; Proses belajar kelompok kurang optimal karena tidak semua siswa terlibat aktif dan terjadi ketergantungan pada beberapa siswa saja.</li>
+                            </ul>
+                        </div>
+                        <!-- Solusi & Adaptasi Guru -->
+                        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-blue-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-lightbulb text-secondary"></i> Solusi Pedagogik Guru
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Guru beralih menerapkan metode <em>teacher-centered interaktif</em> terarah di kelas; terbukti siswa menjadi jauh lebih fokus dan antusias mengikuti pelajaran.</li>
+                                <li>&bull; Menyelipkan sesi tanya jawab berkala di sela materi untuk menjaga keterlibatan aktif seluruh siswa; strategi ini diadopsi untuk pertemuan berikutnya.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ANALISIS SIKLUS 2: SISTEM BILANGAN BAGIAN 1 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-indigo-700 to-purple-900 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Siklus 2 &bull; Pertemuan II</span>
+                            <span class="text-purple-200 text-xs font-medium">Kamis, 13 Agustus 2026 &bull; Hadir: 88,89% (32/36 Siswa)</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Analisis Siklus 2: Sistem Bilangan (Bagian 1: Desimal, Biner, Oktal)</h3>
+                    </div>
+                    <a href="assets/documents/Modul Ajar Informatika X - Sistem Bilangan Bagian 1.docx" download class="inline-flex items-center gap-2 bg-white text-purple-950 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-purple-50 transition-all shadow-md flex-shrink-0">
+                        <i class="fas fa-download"></i> Unduh Modul
+                    </a>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Temuan Proses KBM -->
+                        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-check-circle text-accent"></i> Ketercapaian TP & KBM
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Peserta didik memahami konsep basis, digit, dan nilai tempat desimal, biner, dan oktal serta teknik konversi timbal balik antarsistem bilangan.</li>
+                                <li>&bull; Proses KBM berlangsung jauh lebih tertib dan lancar berkat pendekatan penjelasan materi langsung terstruktur dari guru.</li>
+                                <li>&bull; Kehadiran: 32 siswa hadir (88,89%), 1 sakit (Iyan Gatari), dan 3 alpa (Bayu Maulana, Jamaludin, Julian Al Bukhori).</li>
+                            </ul>
+                        </div>
+                        <!-- Tantangan Materi -->
+                        <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-exclamation-triangle text-warm"></i> Tantangan Pemahaman Konversi
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Sebagian siswa membutuhkan waktu dan bimbingan berulang saat melakukan pembagian bersisa bersusun (modulo 2 dan modulo 8).</li>
+                                <li>&bull; Diperlukan ketelitian ekstra dalam membaca sisa pembagian dari bawah ke atas agar tidak terbalik urutan bit (MSB-LSB).</li>
+                            </ul>
+                        </div>
+                        <!-- Solusi Guru -->
+                        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-blue-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-lightbulb text-secondary"></i> Evaluasi Formatif Berkala
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Guru memandu demonstrasi langkah-demi-langkah di papan tulis dan memberikan latihan mandiri serta kelompok berjenjang.</li>
+                                <li>&bull; Mengadakan sesi tanya jawab langsung secara berkala di sela KBM sebagai evaluasi formatif cepat untuk memvalidasi pemahaman siswa.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ANALISIS SIKLUS 3: SISTEM BILANGAN BAGIAN 2 (HEKSADESIMAL) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-amber-600 to-warm p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Siklus 3 &bull; Pertemuan III</span>
+                            <span class="text-amber-100 text-xs font-medium">Kamis, 03 September 2026 &bull; Hadir: 94,44% (34/36 Siswa)</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Analisis Siklus 3: Sistem Bilangan (Bagian 2: Heksadesimal)</h3>
+                    </div>
+                    <a href="assets/documents/Modul_Ajar_Informatika_X_-_Sistem_Bilangan_Bagian_2.docx" download class="inline-flex items-center gap-2 bg-white text-amber-900 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-amber-50 transition-all shadow-md flex-shrink-0">
+                        <i class="fas fa-download text-amber-600"></i> Unduh Modul
+                    </a>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Ketercapaian TP -->
+                        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-check-circle text-accent"></i> Ketercapaian TP
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Peserta didik memahami konsep 16 simbol heksadesimal (0-9 dan A-F) serta teknik konversi ke desimal, biner, dan oktal maupun sebaliknya.</li>
+                                <li>&bull; Memahami relasi pengelompokan 4 digit biner (nibble) menjadi 1 digit heksadesimal yang efisien untuk jaringan TJKT.</li>
+                                <li>&bull; Kehadiran tertinggi selama PPL mencapai 94,44% (34 hadir, 0 sakit/izin, 2 alpa: Julian Al Bukhori, Zuriyat Hidayat).</li>
+                            </ul>
+                        </div>
+                        <!-- Kendala Waktu & Rapat -->
+                        <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-exclamation-triangle text-warm"></i> Keterbatasan Waktu Efektif
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Jam mengajar efektif hanya tersedia 1 JP dikarenakan adanya kegiatan rapat sekolah yang harus dihadiri oleh guru.</li>
+                                <li>&bull; Keterbatasan waktu berdampak pada kondisi siswa yang cenderung kurang bersemangat dan terburu-buru karena ingin segera pulang.</li>
+                            </ul>
+                        </div>
+                        <!-- Solusi Adaptif Guru -->
+                        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-blue-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-lightbulb text-secondary"></i> Penguatan & Tugas Mandiri
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Guru menyajikan konsep heksadesimal dan alur konversi secara padat, fokus, dan esensial dalam waktu 1 JP yang tersedia.</li>
+                                <li>&bull; Memberikan penugasan mandiri terstruktur untuk diselesaikan siswa di rumah guna memperdalam penguasaan materi menjelang ulangan harian.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. ANALISIS SIKLUS 4: ULANGAN HARIAN KOMPREHENSIF -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-red-600 via-rose-700 to-primary p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Siklus 4 &bull; Pertemuan IV</span>
+                            <span class="text-red-100 text-xs font-medium">Kamis, 10 September 2026 &bull; Hadir: 91,67% (33/36 Siswa)</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Analisis Siklus 4: Ulangan Harian (Evaluasi Komprehensif)</h3>
+                    </div>
+                    <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-white hover:bg-red-50 text-red-700 font-bold text-xs px-4 py-2.5 rounded-xl shadow-md transition-all flex-shrink-0">
+                        <i class="fab fa-google-drive text-sm"></i> Tonton Video Siklus 4
+                    </a>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Capaian Evaluasi -->
+                        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-check-circle text-accent"></i> Ketercapaian Asesmen
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Evaluasi menyeluruh terhadap penguasaan materi Sistem Komputer dan Sistem Bilangan (Desimal, Biner, Oktal, Heksadesimal).</li>
+                                <li>&bull; Sebagian besar siswa mampu menuntaskan soal konversi dan analisis komponen komputer secara mandiri.</li>
+                                <li>&bull; Kehadiran: 33 siswa hadir (91,67%), 0 sakit/izin, dan 3 alpa (Iyan Gatari, Jamaludin, Zuriyat Hidayat).</li>
+                            </ul>
+                        </div>
+                        <!-- Kasus Pelanggaran Tata Tertib -->
+                        <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-exclamation-triangle text-warm"></i> Dinamika Pelaksanaan
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Selama ulangan berlangsung, guru mendapati salah seorang siswa yang melanggar tata tertib dengan bermain-main dan bercanda.</li>
+                                <li>&bull; Situasi tersebut berisiko memecah konsentrasi rekan-rekan sekelas yang sedang fokus mengerjakan ujian tertulis.</li>
+                            </ul>
+                        </div>
+                        <!-- Penegakan Disiplin Mendidik -->
+                        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-blue-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-gavel text-secondary"></i> Ketegasan & Evaluasi Lisan
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Guru memberikan tindakan mendidik dengan mengubah bentuk ulangan siswa tersebut dari tertulis menjadi ujian lisan langsung di meja guru.</li>
+                                <li>&bull; Menegakkan konsekuensi disiplin yang adil sekaligus memastikan penilaian kompetensi pemahaman materi tetap terlaksana secara objektif.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. ANALISIS INOVASI MEDIA GAMIFIKASI -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-emerald-600 to-teal-800 p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Artifak #5 & #13</span>
+                            <span class="text-emerald-200 text-xs font-medium">Inovasi Pembelajaran Digital</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Inovasi Pembelajaran & Evaluasi Berbasis Gamifikasi</h3>
+                    </div>
+                    <a href="artifak.html" class="inline-flex items-center gap-2 bg-white text-teal-900 font-bold text-xs px-4 py-2.5 rounded-xl hover:bg-emerald-50 transition-colors shadow-md flex-shrink-0">
+                        <i class="fas fa-play-circle"></i> Tinjau Video Inovasi
+                    </a>
+                </div>
+                <div class="p-6 md:p-8">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Kekuatan -->
+                        <div class="bg-emerald-50/60 border border-emerald-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-emerald-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-check-circle text-accent"></i> Dampak Positif
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Tingkat keterlibatan (engagement) siswa melonjak signifikan, memecah kejenuhan materi teori.</li>
+                                <li>&bull; Umpan balik real-time membantu guru mengidentifikasi indikator soal yang belum dikuasai secara cepat.</li>
+                                <li>&bull; Membangun atmosfer kompetisi yang sehat dan kolaboratif antar-kelompok.</li>
+                            </ul>
+                        </div>
+                        <!-- Tantangan -->
+                        <div class="bg-amber-50/60 border border-amber-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-amber-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-exclamation-triangle text-warm"></i> Tantangan Teknis
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Ketergantungan pada stabilitas sinyal internet dan kuota data siswa saat platform game diakses.</li>
+                                <li>&bull; Risiko distraksi jika siswa beralih membuka aplikasi non-pembelajaran di gawai masing-masing.</li>
+                            </ul>
+                        </div>
+                        <!-- Rekomendasi -->
+                        <div class="bg-blue-50/60 border border-blue-100 rounded-xl p-5">
+                            <div class="flex items-center gap-2 text-blue-800 font-bold mb-3 text-sm">
+                                <i class="fas fa-lightbulb text-secondary"></i> Solusi Berkelanjutan
+                            </div>
+                            <ul class="text-xs text-gray-700 space-y-2 leading-relaxed">
+                                <li>&bull; Menyiapkan versi offline berbasis LAN lab sekolah untuk mengantisipasi gangguan jaringan internet luar.</li>
+                                <li>&bull; Mengintegrasikan aturan komitmen bersama (kontrak belajar gawai) sebelum sesi evaluasi dimulai.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. PENGESAHAN & MONEV GURU PAMONG DAN DPL -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="card-header-gradient bg-gradient-to-r from-slate-800 to-primary p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full font-semibold border border-white/20">Artifak #11 & #12</span>
+                            <span class="text-blue-200 text-xs font-medium">Monev: 05 September 2026 &bull; Pengesahan & Penarikan: 03 Oktober 2026</span>
+                        </div>
+                        <h3 class="font-playfair text-xl md:text-2xl font-bold !text-white text-white !mb-0 m-0" style="color: #ffffff !important; margin: 0 !important;">Monitoring & Evaluasi (Monev) serta Pengesahan Penarikan PPL</h3>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs px-3.5 py-2 rounded-xl font-semibold flex-shrink-0">
+                        <i class="fas fa-check-circle"></i> Status: Disahkan & Dituntaskan
+                    </span>
+                </div>
+                <div class="p-6 md:p-8 space-y-6">
+                    <!-- Timeline & Agenda Card -->
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-200/70 rounded-2xl p-5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-secondary/15 flex items-center justify-center text-secondary text-lg">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-secondary font-bold block">Agenda Tahap 1</span>
+                                    <h4 class="font-bold text-primary text-base">Monitoring & Evaluasi (Monev)</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                Peninjauan langsung proses pembelajaran dan dinamika kelas X TJKT 3 oleh DPL bersama Guru Pamong pada <strong>Sabtu, 5 September 2026</strong> di SMKN 1 Masbagik.
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-secondary">
+                                <i class="fas fa-clock"></i>
+                                <span>Tanggal Pelaksanaan: <strong>Sabtu, 5 September 2026</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-emerald-50 to-teal-50/50 border border-emerald-200/70 rounded-2xl p-5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent text-lg">
+                                    <i class="fas fa-stamp"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-accent font-bold block">Agenda Tahap 2</span>
+                                    <h4 class="font-bold text-primary text-base">Pengesahan & Penarikan PPL</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                Pengesahan resmi seluruh portofolio pembelajaran dan laporan PPL Mandiri oleh Guru Pamong dan DPL sekaligus prosesi resmi penarikan mahasiswa PPL.
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-accent">
+                                <i class="fas fa-check-double"></i>
+                                <span>Tanggal Pengesahan: <strong>Sabtu, 3 Oktober 2026</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dokumentasi Foto Monev Lapangan -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="group relative rounded-xl overflow-hidden border border-gray-200 shadow-sm aspect-video bg-slate-900">
+                            <img src="assets/images/PPG/Kegiatan Monev PPL.jpeg" alt="Kegiatan Monev PPL Lapangan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                                <span class="text-white text-xs font-medium"><i class="fas fa-camera mr-1.5 text-secondary"></i>Dokumentasi Monev Lapangan (05 Sept 2026)</span>
+                            </div>
+                        </div>
+                        <div class="group relative rounded-xl overflow-hidden border border-gray-200 shadow-sm aspect-video bg-slate-900">
+                            <img src="assets/images/PPG/Kegiatan Monev PPL 2.jpeg" alt="Sesi Diskusi & Umpan Balik Monev" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                                <span class="text-white text-xs font-medium"><i class="fas fa-comments mr-1.5 text-emerald-400"></i>Sesi Diskusi & Umpan Balik Pembimbing</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Guru Pamong -->
+                        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary text-xl">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-secondary font-bold block">Guru Pamong</span>
+                                    <h4 class="font-bold text-primary text-base sm:text-lg">Romdhi Surimba, S.Kom</h4>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-gray-600 border-t border-blue-100/80 pt-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Sekolah Mitra:</span>
+                                    <span class="font-medium text-gray-800">SMK Negeri 1 Masbagik</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Bidang Keahlian:</span>
+                                    <span class="font-medium text-gray-800">Informatika / TJKT</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Peran:</span>
+                                    <span class="font-medium text-secondary">Pembimbing Praktik Mengajar Lapangan</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dosen Pembimbing Lapangan -->
+                        <div class="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700 text-xl">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-indigo-700 font-bold block">Dosen Pembimbing Lapangan (DPL)</span>
+                                    <h4 class="font-bold text-primary text-base sm:text-lg">Heri Kuswanto, M.Pd.</h4>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-gray-600 border-t border-indigo-100/80 pt-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Monev Lapangan:</span>
+                                    <span class="font-semibold text-secondary">Sabtu, 5 September 2026</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Pengesahan & Penarikan:</span>
+                                    <span class="font-semibold text-primary">Sabtu, 3 Oktober 2026</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Afiliasi Akademik:</span>
+                                    <span class="font-medium text-gray-800">Universitas Hamzanwadi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========== CTA KE REFLEKSI ========== -->
+    <section class="py-14 bg-gradient-to-r from-primary to-secondary text-white text-center">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="font-playfair text-2xl sm:text-3xl font-bold mb-3 !text-white text-white" style="color: #ffffff !important;">
+                Lanjutkan ke Refleksi Komprehensif
+            </h2>
+            <p class="text-blue-100 text-sm sm:text-base mb-8 max-w-2xl mx-auto">
+                Setelah menganalisis artifak pembelajaran secara objektif, jelajahi refleksi mendalam berbasis Model 4F mengenai pertumbuhan pribadi, pedagogik, dan rencana aksi masa depan.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="refleksi.html" class="inline-flex items-center gap-2 bg-white text-primary font-bold text-sm px-7 py-3 rounded-xl hover:bg-blue-50 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                    <span>Buka Halaman Refleksi</span>
+                    <i class="fas fa-arrow-right text-xs"></i>
+                </a>
+                <a href="artifak.html" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold text-sm px-6 py-3 rounded-xl border border-white/20 transition-all">
+                    <i class="fas fa-folder-open text-xs"></i>
+                    <span>Kembali ke Artifak</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-primary text-white pt-12 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-10 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-10 w-auto object-contain drop-shadow">
+                        <div>
+                            <span class="font-bold text-base text-white block">E-Portfolio PPL</span>
+                            <span class="text-blue-200 text-xs block">Univ. Hamzanwadi &bull; PPG</span>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 text-xs sm:text-sm leading-relaxed">
+                        Dokumentasi autentik dan analisis reflektif pelaksanaan Praktik Pengalaman Lapangan (PPL) Mandiri Informatika di SMKN 1 Masbagik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">Navigasi Cepat</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="index.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Beranda</a></li>
+                        <li><a href="artifak.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Artifak Pembelajaran</a></li>
+                        <li><a href="analisis.html" class="text-white font-semibold flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Analisis Artifak</a></li>
+                        <li><a href="refleksi.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Refleksi Pembelajaran</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">Informasi Pengampu</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-blue-200">
+                        <li class="flex items-center gap-2.5"><i class="fas fa-user-tie text-secondary"></i>Sabda Patogi Aditya, S.Kom</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-school text-accent"></i>SMKN 1 Masbagik</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-laptop-code text-warm"></i>Informatika (Fase E / X TJKT 3)</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-award text-blue-300"></i>PPL Mandiri / PPG 2026/2027</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 text-center text-xs text-blue-300">
+                &copy; 2026 E-Portfolio PPL Mandiri &mdash; Sabda Patogi Aditya, S.Kom &bull; SMKN 1 Masbagik
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('shadow-xl');
+                } else {
+                    navbar.classList.remove('shadow-xl');
+                }
+            });
+        }
+        // Mobile Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openMenu() {
+            if (mobileMenu) mobileMenu.classList.add('open');
+            if (mobileOverlay) mobileOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            if (mobileMenu) mobileMenu.classList.remove('open');
+            if (mobileOverlay) mobileOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+    </script>
+</body>
+</html>
+

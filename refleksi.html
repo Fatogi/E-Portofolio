@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refleksi Pembelajaran | E-Portfolio PPL Mandiri</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a5f',
+                        secondary: '#2e86de',
+                        accent: '#27ae60',
+                        warm: '#e67e22',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .page-hero {
+            background: linear-gradient(135deg, #162c47 0%, #1e3a5f 40%, #2e86de 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, #ffffff, transparent);
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <!-- ========== NAVIGATION BAR ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-40 bg-primary/95 backdrop-blur-md shadow-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo with Hamzanwadi & PPG Prajabatan (Transparent, No BG) -->
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="flex items-center gap-2">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-8 sm:h-9 w-auto object-contain drop-shadow">
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm sm:text-base leading-tight tracking-wide block">E-Portfolio PPL</span>
+                        <span class="text-blue-200 text-[10px] sm:text-xs font-light block">Univ. Hamzanwadi &bull; PPG Prajabatan</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-2 lg:gap-3">
+                    <a href="index.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Beranda</a>
+                    <a href="artifak.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Artifak</a>
+                    <a href="analisis.html" class="nav-link px-4 py-2 rounded-lg text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-all">Analisis Artifak</a>
+                    <a href="refleksi.html" class="nav-link active px-4 py-2 rounded-lg text-sm font-semibold text-white bg-white/20 transition-all">Refleksi</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" class="md:hidden text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors focus:outline-none" aria-label="Toggle menu">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden transition-opacity duration-300"></div>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-primary shadow-2xl z-50 flex flex-col justify-between">
+        <div class="p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center shadow">
+                        <i class="fas fa-graduation-cap text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <span class="text-white font-bold text-sm block leading-tight">E-Portfolio</span>
+                        <span class="text-blue-200 text-xs">PPL Mandiri</span>
+                    </div>
+                </div>
+                <button id="closeMobileMenu" class="text-white/80 hover:text-white w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors" aria-label="Tutup menu">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-2">
+                <a href="index.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-home w-5 text-secondary"></i> Beranda
+                </a>
+                <a href="artifak.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-folder-open w-5 text-accent"></i> Artifak
+                </a>
+                <a href="analisis.html" class="text-white/80 hover:text-white hover:bg-white/10 px-4 py-3 rounded-xl transition-all text-sm font-medium flex items-center gap-3">
+                    <i class="fas fa-chart-line w-5 text-warm"></i> Analisis Artifak
+                </a>
+                <a href="refleksi.html" class="text-white bg-white/20 font-semibold px-4 py-3 rounded-xl transition-all text-sm flex items-center gap-3">
+                    <i class="fas fa-lightbulb w-5 text-yellow-400"></i> Refleksi
+                </a>
+            </div>
+        </div>
+        <div class="p-6 border-t border-white/10 text-center">
+            <p class="text-xs text-blue-200">E-Portfolio PPL Mandiri &copy; 2026</p>
+        </div>
+    </div>
+
+
+    <!-- ========== PAGE HERO ========== -->
+    <section class="page-hero pt-28 pb-14 md:pt-36 md:pb-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Breadcrumb -->
+            <nav class="flex justify-center mb-6">
+                <ol class="flex items-center gap-2 text-sm text-blue-100/80">
+                    <li><a href="index.html" class="hover:text-white transition-colors"><i class="fas fa-home mr-1"></i>Beranda</a></li>
+                    <li><i class="fas fa-chevron-right text-xs mx-1"></i></li>
+                    <li class="text-white font-semibold">Refleksi</li>
+                </ol>
+            </nav>
+
+            <h1 class="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                Refleksi <span class="text-blue-200">Pembelajaran</span>
+            </h1>
+            <p class="text-blue-100 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
+                Refleksi Kritis Model 4F — Menelaah Pertumbuhan Pedagogik & Profesionalisme Guru di SMKN 1 Masbagik
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ========== 4F FRAMEWORK INTRO ========== -->
+    <section class="py-14 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="inline-flex items-center gap-2 bg-warm/10 text-warm px-4 py-1.5 rounded-full text-sm font-semibold mb-3">
+                    <i class="fas fa-brain"></i> Model Refleksi 4F (Dr. Roger Greenaway)
+                </span>
+                <h2 class="font-playfair text-2xl sm:text-3xl font-bold text-primary mb-3">
+                    Empat Dimensi Perjalanan Belajar Mengajar
+                </h2>
+                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                    Refleksi ini merangkum proses internalisasi pengalaman mengajar Informatika Fase E (Kelas X TJKT 3) oleh <strong>Sabda Patogi Aditya, S.Kom</strong> melalui tahapan Peristiwa (Facts), Perasaan (Feelings), Pembelajaran (Findings), dan Penerapan ke Depan (Future).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+                <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-secondary text-white rounded-2xl flex items-center justify-center mx-auto mb-3 text-lg font-bold shadow-md shadow-secondary/20">
+                        1F
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Facts</h3>
+                    <p class="text-gray-500 text-xs">Peristiwa & Rekam Jejak Pelaksanaan PPL Mandiri</p>
+                </div>
+                <div class="bg-purple-50/70 border border-purple-100 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-3 text-lg font-bold shadow-md shadow-purple-600/20">
+                        2F
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Feelings</h3>
+                    <p class="text-gray-500 text-xs">Dinamika Emosi, Tantangan & Kepuasan Mengajar</p>
+                </div>
+                <div class="bg-emerald-50/70 border border-emerald-100 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-accent text-white rounded-2xl flex items-center justify-center mx-auto mb-3 text-lg font-bold shadow-md shadow-accent/20">
+                        3F
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Findings</h3>
+                    <p class="text-gray-500 text-xs">Pelajaran Berharga & Wawasan Pedagogik Baru</p>
+                </div>
+                <div class="bg-orange-50/70 border border-orange-100 rounded-2xl p-5 text-center">
+                    <div class="w-12 h-12 bg-warm text-white rounded-2xl flex items-center justify-center mx-auto mb-3 text-lg font-bold shadow-md shadow-warm/20">
+                        4F
+                    </div>
+                    <h3 class="font-bold text-primary text-base mb-1">Future</h3>
+                    <p class="text-gray-500 text-xs">Rencana Aksi & Transformasi Pengajaran Berkelanjutan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== DETAIL 4F SECTIONS ========== -->
+    <section class="py-16 md:py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+
+            <!-- 1. FACTS (PERISTIWA) -->
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-secondary to-blue-700 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-secondary/25">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-secondary tracking-wider">Tahap 1 &bull; Facts</span>
+                        <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary">Peristiwa (Facts)</h3>
+                    </div>
+                </div>
+                <div class="text-gray-700 text-sm sm:text-base leading-relaxed space-y-5">
+                    <p>
+                        Pelaksanaan Praktik Pengalaman Lapangan (PPL) Mandiri dilaksanakan di <strong>SMKN 1 Masbagik</strong>, mengampu mata pelajaran <strong>Informatika Fase E</strong> pada kelas <strong>X TJKT 3</strong>. Seluruh rangkaian KBM terstruktur dalam 4 siklus mengajar berkesinambungan serta didukung oleh berbagai aktivitas non-mengajar:
+                    </p>
+                    <ul class="space-y-3.5 pl-2">
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-blue-100 text-secondary font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                            <span><strong>Siklus 1 (Pertemuan I &bull; Kamis, 06 Agustus 2026):</strong> Pengenalan Sistem Komputer (Hardware, Software, Brainware) serta alur Input-Process-Output (I-P-O). Guru mengidentifikasi kecenderungan kelas yang lebih antusias dan fokus dengan pendekatan <em>teacher-centered interaktif</em> terarah dibandingkan diskusi kelompok bebas tanpa panduan ketat. Kehadiran: <strong>86,11%</strong> (31 hadir, 3 sakit: Abdul Majid Al Faozan, Ardian Holid, Bilal Iman; 2 alpa: Firmanto Saputra, Bayu Maulana).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                            <span><strong>Siklus 2 (Pertemuan II &bull; Kamis, 13 Agustus 2026):</strong> Pembelajaran Sistem Bilangan Bagian 1 (Konsep Desimal, Biner, dan Oktal beserta konversi matematisnya). Pembelajaran berjalan lebih lancar dan tertib melalui demonstrasi langkah-demi-langkah di papan tulis, latihan berjenjang, dan evaluasi formatif tanya-jawab cepat. Kehadiran: <strong>88,89%</strong> (32 hadir, 1 sakit: Iyan Gatari; 3 alpa: Bayu Maulana, Jamaludin, Julian Al Bukhori).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-amber-100 text-warm font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                            <span><strong>Siklus 3 (Pertemuan III &bull; Kamis, 03 September 2026):</strong> Pembelajaran Sistem Bilangan Bagian 2 (Heksadesimal). Jam efektif berlangsung padat (1 JP) karena guru mengikuti agenda rapat sekolah; guru menyampaikan materi esensial secara terfokus dan memberikan latihan mandiri terstruktur untuk diselesaikan siswa di rumah. Kehadiran tertinggi: <strong>94,44%</strong> (34 hadir, 0 sakit/izin, 2 alpa: Julian Al Bukhori, Zuriyat Hidayat &bull; Modul Ajar Bagian 2 terlampir).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-red-100 text-red-600 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5">4</span>
+                            <div class="flex-1">
+                                <strong>Siklus 4 (Pertemuan IV &bull; Kamis, 10 September 2026 / Hari Ke-4):</strong> Pelaksanaan Ulangan Harian komprehensif untuk mengevaluasi penguasaan materi Sistem Komputer dan Sistem Bilangan. Guru menerapkan ketegasan edukatif dan objektif: peserta didik yang bermain-main saat ujian dialihkan ke asesmen lisan individu di meja guru untuk menguji kompetensinya secara langsung dan menjaga ketenangan kelas. Kehadiran: <strong>91,67%</strong> (33 hadir, 0 sakit/izin, 3 alpa: Iyan Gatari, Jamaludin, Zuriyat Hidayat).
+                                <div class="mt-2 flex flex-wrap items-center gap-2">
+                                    <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700 shadow-sm transition-all">
+                                        <i class="fab fa-google-drive"></i> Tonton Rekaman Video Siklus 4
+                                    </a>
+                                    <span class="text-xs text-gray-500 italic">Tersedia rekaman video otentik beresolusi tinggi</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5"><i class="fas fa-plus text-[9px]"></i></span>
+                            <span><strong>Kegiatan Pendukung & Non-Mengajar:</strong> Perancangan inovasi evaluasi gamifikasi, bimbingan Monev bersama Guru Pamong (<strong>Romdhi Surimba, S.Kom</strong>) dan DPL (<strong>Heri Kuswanto, M.Pd.</strong>), pendampingan ekstrakurikuler Petanque, serta partisipasi peringatan Maulid Nabi SAW di SMKN 1 Masbagik.</span>
+                        </li>
+                    </ul>
+
+                    <!-- Dedicated Video Showcase Box for Siklus 4 -->
+                    <div class="mt-6 bg-gradient-to-br from-slate-900 to-primary rounded-2xl p-5 sm:p-6 text-white shadow-lg overflow-hidden border border-blue-400/20">
+                        <div class="flex flex-col md:flex-row gap-6 items-center">
+                            <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-2xl border border-white/20 aspect-video bg-black relative group">
+                                <iframe src="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/preview" class="w-full h-full border-0" allow="autoplay; fullscreen" loading="lazy"></iframe>
+                            </div>
+                            <div class="w-full md:w-1/2 space-y-3">
+                                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/30 text-xs font-semibold">
+                                    <i class="fab fa-google-drive text-red-400"></i> Video Bukti Siklus 4 Terverifikasi
+                                </div>
+                                <h4 class="text-lg sm:text-xl font-bold font-playfair text-white leading-snug">
+                                    Dokumentasi Video Pembelajaran Siklus 4 (Ulangan Harian)
+                                </h4>
+                                <p class="text-blue-100/80 text-xs sm:text-sm leading-relaxed">
+                                    Rekaman autentik Hari Ke-4 (10 September 2026) di kelas X TJKT 3 SMKN 1 Masbagik. Memperlihatkan pengondisian awal kelas, jalannya asesmen sumatif tertulis, hingga pelaksanaan ujian lisan edukatif.
+                                </p>
+                                <div class="flex flex-wrap gap-2 pt-2">
+                                    <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-red-600/30">
+                                        <i class="fab fa-google-drive"></i> Buka di Google Drive <i class="fas fa-external-link-alt text-[10px]"></i>
+                                    </a>
+                                    <a href="artifak.html#video" class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-blue-100 rounded-xl text-xs font-semibold transition-all border border-white/20">
+                                        <i class="fas fa-folder-open"></i> Lihat di Artifak
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. FEELINGS (PERASAAN) -->
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-700 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-purple-600/25">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-purple-600 tracking-wider">Tahap 2 &bull; Feelings</span>
+                        <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary">Perasaan (Feelings)</h3>
+                    </div>
+                </div>
+                <div class="text-gray-700 text-sm sm:text-base leading-relaxed space-y-4">
+                    <p>
+                        Pada awal pelaksanaan PPL, muncul rasa cemas dan keraguan mengenai kesiapan mengelola kelas kejuruan SMK yang memiliki rentang perhatian serta motivasi belajar yang sangat heterogen. Ada kekhawatiran bahwa materi logika teoritis seperti struktur komputer dan konversi bilangan biner akan dirasakan kaku dan membosankan oleh siswa.
+                    </p>
+                    <p>
+                        Namun, perasaan ragu tersebut berangsur berubah menjadi <strong>rasa bangga, lega, dan penuh antusiasme</strong> ketika pendekatan <em>direct instruction</em> yang diselingi tanya jawab interaktif dan media gamifikasi diterapkan di Siklus 1 hingga 3. Melihat keaktifan siswa yang berani maju ke depan mengerjakan konversi bilangan biner di papan tulis memberikan kepuasan batin yang mendalam sebagai seorang pendidik muda.
+                    </p>
+                    <p>
+                        Pada <strong>Siklus 4 (Ulangan Harian)</strong>, muncul ujian emosional tersendiri saat mendapati salah satu peserta didik yang bercanda dan tidak fokus saat pengerjaan soal. Sempat ada dorongan untuk menegur secara keras, namun saya memilih untuk tetap tenang dan mengambil tindakan edukatif dengan memindahkan siswa tersebut ke meja guru untuk menjalani asesmen lisan. Perasaan lega dan puas hadir ketika siswa tersebut justru menunjukkan pemahaman konsep yang baik saat diuji langsung, tanpa merusak suasana tenang rekan-rekan sekelasnya.
+                    </p>
+                    <p>
+                        Dukungan dan bimbingan Monev (<strong>Sabtu, 5 September 2026</strong>) serta pengesahan resmi dari Guru Pamong (<strong>Romdhi Surimba, S.Kom</strong>) dan Dosen Pembimbing Lapangan (<strong>Heri Kuswanto, M.Pd.</strong>) sekaligus momentum penarikan resmi PPL Mandiri tertanggal <strong>Sabtu, 3 Oktober 2026</strong> memberikan dorongan moral dan rasa percaya diri yang tinggi bahwa setiap dinamika di ruang kelas dapat ditransformasikan menjadi pembelajaran pedagogik yang bermakna.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. FINDINGS (PEMBELAJARAN) -->
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-accent to-emerald-700 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-accent/25">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-accent tracking-wider">Tahap 3 &bull; Findings</span>
+                        <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary">Pembelajaran (Findings)</h3>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-5 text-gray-700 text-sm sm:text-base">
+                    <div class="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-5">
+                        <div class="font-bold text-emerald-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-check text-accent"></i> Diferensiasi & Kepekaan Emosional
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Siswa SMK memiliki modalitas belajar visual, kinestetik, dan auditori yang beragam. Penerapan Pembelajaran Sosial-Emosional (PSE) berupa sapaan personal dan jeda reflektif terbukti efektif memulihkan fokus belajar di jam-jam rawan kelelahan.
+                        </p>
+                    </div>
+                    <div class="bg-red-50/50 border border-red-100 rounded-2xl p-5">
+                        <div class="font-bold text-red-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-user-graduate text-red-500"></i> Disiplin Edukatif & Asesmen Fleksibel (Siklus 4)
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Pengalaman mengalihkan siswa yang tidak fokus ke ujian lisan membuktikan bahwa asesmen bukan alat menghukum, melainkan instrumen diagnosis. Asesmen lisan adaptif berhasil memverifikasi penguasaan konsep sekaligus menegakkan integritas ruang kelas.
+                        </p>
+                    </div>
+                    <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-5">
+                        <div class="font-bold text-blue-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-video text-secondary"></i> Refleksi Kritis Berbasis Video Mengajar
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Menelaah rekaman video Siklus 4 (Google Drive) menjadi cermin objektif untuk mengevaluasi intonasi suara, ketepatan alokasi waktu (*time management*), bahasa tubuh, serta pola distribusi perhatian guru ke seluruh penjuru ruang kelas.
+                        </p>
+                    </div>
+                    <div class="bg-purple-50/50 border border-purple-100 rounded-2xl p-5">
+                        <div class="font-bold text-purple-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-network-wired text-purple-600"></i> Kontekstualisasi Kejuruan TJKT
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Materi abstrak sistem komputer dan bilangan biner/oktal/heksadesimal menjadi mudah dicerna ketika dikaitkan langsung dengan keahlian jaringan, seperti subnet mask, IP addressing, dan alokasi memory address perangkat keras.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50/50 border border-amber-100 rounded-2xl p-5">
+                        <div class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-gamepad text-warm"></i> Kuasa Evaluasi Gamifikasi Terarah
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Gamifikasi bukan sekadar selingan bermain, melainkan pengondisian kompetisi sehat yang memicu keberanian siswa dalam mencoba menjawab soal tanpa rasa malu atau takut dihakimi ketika berbuat salah.
+                        </p>
+                    </div>
+                    <div class="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-5">
+                        <div class="font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                            <i class="fas fa-handshake text-indigo-600"></i> Bimbingan Kolaboratif & Pengesahan Nyata
+                        </div>
+                        <p class="text-xs leading-relaxed text-gray-600">
+                            Evaluasi berkala bersama Guru Pamong <strong>Romdhi Surimba, S.Kom</strong> dan DPL <strong>Heri Kuswanto, M.Pd.</strong> (Monev: 5 September 2026, disahkan pada penarikan PPL: 3 Oktober 2026) memperkaya wawasan guru dalam mengelola kelas kejuruan berbasis data empiris lapangan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. FUTURE (PENERAPAN KE DEPAN) -->
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-warm to-amber-600 text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-warm/25">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-warm tracking-wider">Tahap 4 &bull; Future</span>
+                        <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary">Penerapan ke Depan (Future)</h3>
+                    </div>
+                </div>
+                <div class="space-y-4 text-gray-700 text-sm sm:text-base leading-relaxed">
+                    <p>
+                        Berdasarkan wawasan pedagogik yang diperoleh dari pelaksanaan 4 siklus KBM serta rekaman video autentik di SMKN 1 Masbagik, rencana aksi tindak lanjut yang akan diterapkan meliputi:
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3 bg-amber-50/50 border border-amber-200/60 rounded-xl p-4">
+                            <i class="fas fa-network-wired text-warm text-lg mt-0.5"></i>
+                            <div>
+                                <strong class="text-gray-900 block text-sm">1. Penguatan Konsep Heksadesimal & Praktik Proyek Jaringan Nyata (TJKT)</strong>
+                                <span class="text-xs text-gray-600">Mengembangkan skenario pembelajaran berbasis proyek (Project Based Learning) untuk mengimplementasikan Modul Ajar Bagian 2 yang telah lengkap, seperti analisis paket data Wireshark, konversi subnet mask / IP Address, dan pembacaan MAC Address kartu jaringan.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-red-50/50 border border-red-200/60 rounded-xl p-4">
+                            <i class="fab fa-google-drive text-red-500 text-lg mt-0.5"></i>
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between flex-wrap gap-2">
+                                    <strong class="text-gray-900 block text-sm">2. Integrasi Rekaman Video Siklus 4 & Evaluasi Berkelanjutan (CPD)</strong>
+                                    <a href="https://drive.google.com/file/d/1eht4EfP-VNnENkPI4z6a7vxKCRcy8Y2w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-xs text-red-600 hover:text-red-700 font-bold underline flex items-center gap-1">
+                                        <i class="fab fa-google-drive"></i> Tonton Rekaman <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                                    </a>
+                                </div>
+                                <span class="text-xs text-gray-600 block mt-1">Video rekaman KBM Hari Ke-4 telah terhubung penuh ke Google Drive dan siap dimanfaatkan untuk refleksi berbasis video (*Video-Stimulated Recall Reflection*) serta portofolio uji kompetensi PPG.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-blue-50/50 border border-blue-200/60 rounded-xl p-4">
+                            <i class="fas fa-clipboard-question text-secondary text-lg mt-0.5"></i>
+                            <div>
+                                <strong class="text-gray-900 block text-sm">3. Standardisasi Rubrik Asesmen Diagnostik & Ujian Lisan Adaptif</strong>
+                                <span class="text-xs text-gray-600">Menyusun rubrik penilaian asesmen lisan terstruktur dan bank soal bertingkat (dari LOTS hingga HOTS) sebagai instrumen diferensiasi terukur bagi peserta didik dengan dinamika belajar khusus.</span>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-emerald-50/50 border border-emerald-200/60 rounded-xl p-4">
+                            <i class="fas fa-layer-group text-accent text-lg mt-0.5"></i>
+                            <div>
+                                <strong class="text-gray-900 block text-sm">4. Pengembangan Media Pembelajaran Gamifikasi Mandiri Berbasis Web</strong>
+                                <span class="text-xs text-gray-600">Menciptakan aplikasi web quiz mandiri berbasis gamifikasi yang ringan, interaktif, dan dapat diakses siswa kapan saja melalui smartphone tanpa boros kuota internet.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. MONITORING, EVALUASI (MONEV) & PENGESAHAN PENARIKAN PPL -->
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-100">
+                    <div class="w-14 h-14 bg-gradient-to-br from-slate-800 to-primary text-white rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-primary/25">
+                        <i class="fas fa-stamp"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold text-secondary tracking-wider">Validasi Institusi & Pengesahan PPL</span>
+                        <h3 class="font-playfair text-2xl sm:text-3xl font-bold text-primary">Monitoring, Evaluasi (Monev) & Pengesahan Penarikan PPL</h3>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <p class="text-gray-700 text-sm sm:text-base leading-relaxed">
+                        Seluruh pelaksanaan siklus pembelajaran, analisis artifak, dan dokumen refleksi Praktik Pengalaman Lapangan (PPL) Mandiri Informatika di SMK Negeri 1 Masbagik telah melalui tahapan monitoring lapangan dan disahkan secara resmi oleh Guru Pamong dan Dosen Pembimbing Lapangan:
+                    </p>
+
+                    <!-- 2 Milestones Cards -->
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/50 border border-blue-200/70 rounded-2xl p-5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-secondary/15 flex items-center justify-center text-secondary text-lg">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-secondary font-bold block">Agenda Tahap 1</span>
+                                    <h4 class="font-bold text-primary text-base">Monitoring & Evaluasi (Monev)</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                Peninjauan langsung proses pembelajaran dan dinamika kelas X TJKT 3 oleh DPL bersama Guru Pamong pada <strong>Sabtu, 5 September 2026</strong> di SMKN 1 Masbagik.
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-secondary">
+                                <i class="fas fa-clock"></i>
+                                <span>Tanggal Pelaksanaan: <strong>Sabtu, 5 September 2026</strong></span>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-emerald-50 to-teal-50/50 border border-emerald-200/70 rounded-2xl p-5 shadow-sm">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-xl bg-accent/15 flex items-center justify-center text-accent text-lg">
+                                    <i class="fas fa-stamp"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-accent font-bold block">Agenda Tahap 2</span>
+                                    <h4 class="font-bold text-primary text-base">Pengesahan & Penarikan PPL</h4>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                Pengesahan resmi seluruh portofolio pembelajaran dan laporan PPL Mandiri oleh Guru Pamong dan DPL sekaligus prosesi resmi penarikan mahasiswa PPL.
+                            </p>
+                            <div class="flex items-center gap-2 text-xs font-semibold text-accent">
+                                <i class="fas fa-check-double"></i>
+                                <span>Tanggal Pengesahan: <strong>Sabtu, 3 Oktober 2026</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dokumentasi Foto Monev Lapangan -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="group relative rounded-xl overflow-hidden border border-gray-200 shadow-sm aspect-video bg-slate-900">
+                            <img src="assets/images/PPG/Kegiatan Monev PPL.jpeg" alt="Kegiatan Monev PPL Lapangan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                                <span class="text-white text-xs font-medium"><i class="fas fa-camera mr-1.5 text-secondary"></i>Dokumentasi Monev Lapangan (05 Sept 2026)</span>
+                            </div>
+                        </div>
+                        <div class="group relative rounded-xl overflow-hidden border border-gray-200 shadow-sm aspect-video bg-slate-900">
+                            <img src="assets/images/PPG/Kegiatan Monev PPL 2.jpeg" alt="Sesi Diskusi & Umpan Balik Monev" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                                <span class="text-white text-xs font-medium"><i class="fas fa-comments mr-1.5 text-emerald-400"></i>Sesi Diskusi, Umpan Balik & Pengesahan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pembimbing Info Cards -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Guru Pamong -->
+                        <div class="bg-blue-50/70 border border-blue-100 rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary text-xl">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-secondary font-bold block">Guru Pamong</span>
+                                    <h4 class="font-bold text-primary text-base sm:text-lg">Romdhi Surimba, S.Kom</h4>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-gray-600 border-t border-blue-100/80 pt-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Sekolah Mitra:</span>
+                                    <span class="font-medium text-gray-800">SMK Negeri 1 Masbagik</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Monev Lapangan:</span>
+                                    <span class="font-medium text-primary">Sabtu, 5 September 2026</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Pengesahan & Penarikan:</span>
+                                    <span class="font-bold text-secondary">Sabtu, 3 Oktober 2026</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DPL -->
+                        <div class="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700 text-xl">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase tracking-wider text-indigo-700 font-bold block">Dosen Pembimbing Lapangan (DPL)</span>
+                                    <h4 class="font-bold text-primary text-base sm:text-lg">Heri Kuswanto, M.Pd.</h4>
+                                </div>
+                            </div>
+                            <div class="space-y-2 text-xs text-gray-600 border-t border-indigo-100/80 pt-3">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">LPTK:</span>
+                                    <span class="font-medium text-gray-800">Universitas Hamzanwadi</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Monev Lapangan:</span>
+                                    <span class="font-medium text-primary">Sabtu, 5 September 2026</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-500">Pengesahan & Penarikan:</span>
+                                    <span class="font-bold text-indigo-700">Sabtu, 3 Oktober 2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-primary text-white pt-12 pb-8 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="assets/images/PPG/Logo Kampus_transparent.png" alt="Universitas Hamzanwadi" class="h-10 w-auto object-contain drop-shadow">
+                        <img src="assets/images/PPG/Logo PPG_darkbg.png" alt="PPG Prajabatan" class="h-10 w-auto object-contain drop-shadow">
+                        <div>
+                            <span class="font-bold text-base text-white block">E-Portfolio PPL</span>
+                            <span class="text-blue-200 text-xs block">Univ. Hamzanwadi &bull; PPG</span>
+                        </div>
+                    </div>
+                    <p class="text-blue-200 text-xs sm:text-sm leading-relaxed">
+                        Dokumentasi autentik dan analisis reflektif pelaksanaan Praktik Pengalaman Lapangan (PPL) Mandiri Informatika di SMKN 1 Masbagik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">Navigasi Cepat</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm">
+                        <li><a href="index.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Beranda</a></li>
+                        <li><a href="artifak.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Artifak Pembelajaran</a></li>
+                        <li><a href="analisis.html" class="text-blue-200 hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Analisis Artifak</a></li>
+                        <li><a href="refleksi.html" class="text-white font-semibold flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-secondary"></i>Refleksi Pembelajaran</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">Informasi Pengampu</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-blue-200">
+                        <li class="flex items-center gap-2.5"><i class="fas fa-user-tie text-secondary"></i>Sabda Patogi Aditya, S.Kom</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-school text-accent"></i>SMKN 1 Masbagik</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-laptop-code text-warm"></i>Informatika (Fase E / X TJKT 3)</li>
+                        <li class="flex items-center gap-2.5"><i class="fas fa-award text-blue-300"></i>PPL Mandiri / PPG 2026/2027</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-6 text-center text-xs text-blue-300">
+                &copy; 2026 E-Portfolio PPL Mandiri &mdash; Sabda Patogi Aditya, S.Kom &bull; SMKN 1 Masbagik
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    navbar.classList.add('shadow-xl');
+                } else {
+                    navbar.classList.remove('shadow-xl');
+                }
+            });
+        }
+        // Mobile Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openMenu() {
+            if (mobileMenu) mobileMenu.classList.add('open');
+            if (mobileOverlay) mobileOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            if (mobileMenu) mobileMenu.classList.remove('open');
+            if (mobileOverlay) mobileOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+    </script>
+</body>
+</html>
+
